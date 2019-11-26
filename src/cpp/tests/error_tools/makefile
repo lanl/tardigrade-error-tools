@@ -12,7 +12,9 @@ include ../../../../config.mk
 EXECUTABLE=test_error_tools
 TESTOBJECT=test_error_tools.o
 TESTSOURCE=test_error_tools.cpp
-SOURCE=../../error_tools.h
+OBJECT=error_tools.o
+HEADER=../../error_tools.h
+SOURCE=../../error_tools.cpp
 INC+=-I../..
 LOCAL_CFLAGS=-ggdb
 
@@ -28,11 +30,17 @@ endif
 # Makefile rules
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(TESTSOURCE) $(SOURCE)
-	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+$(EXECUTABLE): $(TESTOBJECT) $(OBJECT)
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $^ -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+
+$(TESTOBJECT): $(TESTSOURCE) $(HEADER)
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+
+$(OBJECT): $(SOURCE) $(HEADER)
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
 
 clean:
 	rm -f $(EXECUTABLE)
-	rm $(TESTOBJECT)
+	rm $(TESTOBJECT) $(OBJECT)
 
 .PHONY: all clean

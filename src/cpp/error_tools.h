@@ -8,21 +8,19 @@
 ===============================================================================
 */
 
+#ifndef ERROR_TOOLS_H
+#define ERROR_TOOLS_H
+
 #include<memory>
 #include<string>
 #include<iostream>
+#include<stdlib.h>
 
 namespace errorTools{
 
-    void replaceAll(std::string& str, const std::string& from, const std::string& to) {
-        size_t start_pos = 0;
-        while((start_pos = str.find(from, start_pos)) != std::string::npos) {
-                 str.replace(start_pos, from.length(), to);
-                 start_pos += to.length(); // ...
-        }
-    }
+    void replaceAll(std::string& str, const std::string& from, const std::string& to);
 
-    struct Node{
+    class Node{
         /*!
          * A single node in the linked list chain. Contains three pieces of information:
          * 
@@ -30,60 +28,39 @@ namespace errorTools{
          * error: A string describing the error that occurred.
          * node: A pointer to the next node in the list.
          */
-        std::string functionName;
-        std::string error;
-        bool errorReplace = false;
-        std::unique_ptr<Node> next = NULL;
 
-        Node(std::string functionName):functionName(functionName){
-            /*!
-             * Create a node in the error string
-             * 
-             * :param std::string functionName: The function name within which the error was created
-             */
-        }
+        private:
 
-        Node(std::string functionName, std::string error):functionName(functionName), error(error){
-            /*!
-             * Create a node in the error string
-             * 
-             * :param std::string functionName: The function name within which the error was created
-             * :param std::string error: The string discribing the error.
-             */
-        }
+            std::string functionName;
+            std::string error;
+            bool errorReplace = false;
+            std::unique_ptr<Node> next = NULL;
 
-        void addNext(Node *newNode){
-            /*!
-             * Add another layer to the errors
-             * 
-             * :param Node &newNode: The new node to be added
-             */
-            this->next.reset(newNode);
-            return;
-        }
+        public:
 
-        void print(){
-            /*!
-             * Print the errors in a list of nodes.
-             * 
-             * :param Node* error: A node in the chain
-             *
-             */
-        
-            std::cerr << "In function " << functionName << "\n";
+            //Constructors
     
-            if (!errorReplace){
-                replaceAll(error, "\n", "\n\t");
-                errorReplace = true;
+            Node(std::string functionName):functionName(functionName){
+                /*!
+                 * Create a node in the error string
+                 * 
+                 * :param std::string functionName: The function name within which the error was created
+                 */
             }
     
-            std::cerr << "\t" << error << "\n";
-    
-            if (next != NULL){
-                next->print();
+            Node(std::string functionName, std::string error):functionName(functionName), error(error){
+                /*!
+                 * Create a node in the error string
+                 * 
+                 * :param std::string functionName: The function name within which the error was created
+                 * :param std::string error: The string discribing the error.
+                 */
             }
     
-            return;
-        }
+            void addNext(Node *newNode);
+    
+            void print();
     };
 }
+
+#endif
