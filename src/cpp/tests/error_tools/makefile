@@ -31,13 +31,13 @@ endif
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(TESTOBJECT) $(OBJECT)
-	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $^ -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $^ -o $@ $(CFLAGS) -lstdc++ -std=c++11
 
 $(TESTOBJECT): $(TESTSOURCE) $(HEADER)
-	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=c++11
 
 $(OBJECT): $(SOURCE) $(HEADER)
-	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=gnu++11
+	$(CXX) $(LOCAL_CFLAGS) $(INC) $(LIB) $(DBG) $< -c -o $@ $(CFLAGS) -lstdc++ -std=c++11
 
 clean:
 	rm -f $(EXECUTABLE)
