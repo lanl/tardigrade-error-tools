@@ -34,7 +34,7 @@ namespace errorTools{
             std::string functionName;
             std::string error;
             bool errorReplace = false;
-            std::unique_ptr<Node> next = NULL;
+            std::unique_ptr<Node> next;
 
         public:
 
