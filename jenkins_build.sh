@@ -23,5 +23,5 @@ else
 fi
 
 # Perform repo tests
-cd ${workdir}/src/cpp/test/${repo}/
+cd ${workdir}/src/cpp/tests/${repo}/
 make
