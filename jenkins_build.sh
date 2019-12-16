@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-repo='error_tools'
-workdir=${PWD}
-declare -A deprepo 
-deprepo['eigen']='https://gitlab.com/libeigen/eigen.git'
-proxyout='proxyout.lanl.gov:8080'
-
 # Source the Intel compilers
 source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform linux
 
@@ -15,19 +9,14 @@ source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform linux
 set -Eeuxo pipefail
 
 # Clone dependencies
-cd ..
-for deprepodir in "${!deprepo[@]}"; do
-    if [ ! -d ${deprepodir} ]; then
-        all_proxy=${proxyout} git clone ${deprepo[$deprepodir]}
-    else
-        cd ${deprepodir} && all_proxy=${proxyout} git pull
-        cd ..
-    fi
-done
+source update_dependencies.sh
 
-# Perform repo tests
+# Build repo tests
 cd ${workdir}/src/cpp/tests/${repo}/
 if [ -f ${repo}.o ]; then
     make clean
 fi
 make
+
+# Perform repo tests
+./test_${repo}
