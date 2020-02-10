@@ -33,7 +33,7 @@ release = '0.0.1'
 extensions = ["breathe"]
 
 # Breathe Configuration
-breathe_projects = {"error_tools": "../build0/docs/doxygen/xml"}
+breathe_projects = {"error_tools": "../build/docs/doxygen/xml"}
 breathe_default_project = "error_tools"
 
 # Add any paths that contain templates here, relative to this directory.

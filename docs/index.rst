@@ -3,6 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+=======================================
 Welcome to error_tools's documentation!
 =======================================
 
@@ -10,8 +11,7 @@ Welcome to error_tools's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
-
+==================
 Indices and tables
 ==================
 
@@ -19,8 +19,21 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+===============
 error_tools API
 ===============
 
-.. doxygennamespace:: errorTools
+***************
+error_tools.cpp
+***************
+
+.. doxygenfile:: error_tools.cpp
+.. doxygenclass:: errorTools::Node
    :members:
+   :undoc-members:
+
+*************
+error_tools.h
+*************
+
+.. doxygenfile:: error_tools.h

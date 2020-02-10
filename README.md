@@ -27,13 +27,13 @@ this command will change on different platforms.
 
 ---
 
-Building the documentation:
+## Building the documentation:
 
 1) Create the build directory
 
 ```
-mkdir build0/
-cd build0/
+mkdir build/
+cd build/
 ```
 
 2) Set the environment CXX variable
@@ -57,5 +57,5 @@ make
 5) Documentation builds to: 
 
 ```
-.../error_tools/build0/docs/sphinx/index.html
+.../error_tools/build/docs/sphinx/index.html
 ```
