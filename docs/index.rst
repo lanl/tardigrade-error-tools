@@ -9,7 +9,9 @@ Welcome to error_tools's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
+
+   error_tools
 
 ==================
 Indices and tables
@@ -18,22 +20,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-===============
-error_tools API
-===============
-
-***************
-error_tools.cpp
-***************
-
-.. doxygenfile:: error_tools.cpp
-.. doxygenclass:: errorTools::Node
-   :members:
-   :undoc-members:
-
-*************
-error_tools.h
-*************
-
-.. doxygenfile:: error_tools.h
