@@ -19,8 +19,8 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-Docs
-====
+error_tools API
+===============
 
-.. doxygennamespace:: error_tools
+.. doxygennamespace:: errorTools
    :members:
