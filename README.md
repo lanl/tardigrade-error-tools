@@ -18,3 +18,40 @@ These tools have several dependencies that must be available in the same parent
 directory as this repo. 
 
 * eigen: https://gitlab.com/libeigen/eigen
+
+---
+
+---
+
+Building the documentation:
+
+1) Create the build directory
+
+```
+mkdir build0/
+cd build0/
+```
+
+2) Set the environment CXX variable
+
+```
+export CXX=g++
+```
+
+3) Run cmake3
+
+```
+cmake3 ..
+```
+
+4) Run make
+
+```
+make
+```
+
+5) Documentation builds to: 
+
+```
+.../error_tools/build0/docs/sphinx/index.html
+```
