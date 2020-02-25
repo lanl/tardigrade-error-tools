@@ -59,7 +59,7 @@ namespace errorTools{
 
             void addNext(Node *newNode);
 
-            void print();
+            void print( const bool header = true );
     };
 }
 

@@ -73,10 +73,13 @@ int testPrint(std::ofstream &results){
     std::stringbuf buffer;
     cerr_redirect rd(&buffer);
 
-    n1.print();
+    n1.print( );
 
     std::string result = buffer.str();
-    std::string answer = "In function fxn1\n"
+    std::string answer = "\n***************\n"
+                           "*    ERROR    *\n"
+                           "***************\n\n"
+                         "In function fxn1\n"
                          "\terror in fxn2\n"
                          "\t\n"
                          "In function fxn2\n"
@@ -87,9 +90,13 @@ int testPrint(std::ofstream &results){
                          "\t\n"
                          "In function fxn4\n"
                          "\tproblem in addition\n"
-                         "\t\n";
+                         "\t\n"
+                         "\n***************************\n"
+                           "*    END ERROR MESSAGE    *\n"
+                           "***************************\n";
 
     if (result.compare(answer) != 0){
+        std::cout << "result.compare( answer ) " << result.compare( answer ) << "\n";
         results << "testPrint & False\n";
         return 1;
     }
