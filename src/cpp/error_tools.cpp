@@ -30,13 +30,20 @@ namespace errorTools{
         return;
     }
 
-    void Node::print(){
+    void Node::print( const bool header ){
         /**
           * Print the errors in a list of nodes.
           *
-          * :param Node* error: A node in the chain
+          * :param const bool header: Flag which indicates if the header 
+          *     should be printed
           *
           */
+
+        if ( header ){
+            std::cerr << "\n***************\n";
+            std::cerr <<   "*    ERROR    *\n";
+            std::cerr <<   "***************\n\n";
+        }
 
         std::cerr << "In function " << functionName << "\n";
 
@@ -48,7 +55,13 @@ namespace errorTools{
         std::cerr << "\t" << error << "\n";
 
         if (next != NULL){
-            next->print();
+            next->print( false );
+        }
+
+        else {
+            std::cerr << "\n***************************\n";
+            std::cerr <<   "*    END ERROR MESSAGE    *\n";
+            std::cerr <<   "***************************\n";
         }
 
         return;
