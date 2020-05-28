@@ -1,11 +1,13 @@
 cmake_minimum_required (VERSION 3.14)
 
 project (error_tools)
+project (test_error_tools)
 
 # Add the cmake folder to locate the FindSphinx module
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 add_subdirectory ("src/cpp")
+add_subdirectory ("src/cpp/tests/error_tools")
 add_subdirectory ("docs")
 
 set(CMAKE_CXX_STANDARD 11)
