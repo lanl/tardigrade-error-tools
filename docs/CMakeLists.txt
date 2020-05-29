@@ -2,7 +2,7 @@ find_package(Doxygen REQUIRED)
 find_package(Sphinx REQUIRED)
 
 # Find all the public headers
-get_target_property(ERROR_TOOLS_PUBLIC_HEADER_DIR error_tools INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(ERROR_TOOLS_PUBLIC_HEADER_DIR ${CMAKE_PROJECT_NAME} INTERFACE_INCLUDE_DIRECTORIES)
 file(GLOB_RECURSE ERROR_TOOLS_PUBLIC_HEADERS ${ERROR_TOOLS_PUBLIC_HEADER_DIR}/*.h)
 
 # Set doxygen variables
@@ -21,7 +21,7 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                    DEPENDS ${ERROR_TOOLS_PUBLIC_HEADERS}
                    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
                    MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
-                   COMMENT "Generating error_tools docs"
+                   COMMENT "Generating ${CMAKE_PROJECT_NAME} docs"
                    VERBATIM)
 
 # Add doxygen target
@@ -43,10 +43,10 @@ add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                    DEPENDS
                        # Other docs files you want to track should go here (or in some variable)
                        ${CMAKE_CURRENT_SOURCE_DIR}/index.rst
-                       ${CMAKE_CURRENT_SOURCE_DIR}/error_tools.rst
+                       ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_PROJECT_NAME}.rst
                        ${DOXYGEN_INDEX_FILE}
                    MAIN_DEPENDENCY ${SPHINX_SOURCE}/conf.py
-                   COMMENT "Generating error_tools documentation with Sphinx")
+                   COMMENT "Generating ${CMAKE_PROJECT_NAME} documentation with Sphinx")
 
 # Add sphinx target
 add_custom_target(Sphinx ALL DEPENDS ${SPHINX_INDEX_FILE})
