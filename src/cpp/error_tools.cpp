@@ -1,12 +1,12 @@
 /**
-*******************************************************************************
-                                 error_tools.cpp
-*******************************************************************************
-  A collection of tools for error handling in C++ code. This is a lightweight
-  library intended to cause minimal extra burden but can use very useful for
-  when code goes bad.
-*******************************************************************************
-*/
+  ******************************************************************************
+  * error_tools.cpp
+  ******************************************************************************
+  * A collection of tools for error handling in C++ code. This is a lightweight
+  * library intended to cause minimal extra burden but can use very useful for
+  * when code goes bad.
+  ******************************************************************************
+  */
 
 #include<error_tools.h>
 
