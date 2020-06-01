@@ -1,8 +1,12 @@
 set -Eeuxo pipefail
 
-cmake_exec=$(which cmake3)
-if [[ $? -ne 0 ]]; then
-    cmake_exec=$(which cmake)
+if [ -x "$(command -v cmake3)" ]; then
+    cmake_exec=$(command -v cmake3)
+elif [ -x "$(command -v cmake)" ]; then
+    cmake_exec=$(command -v cmake)
+else
+    echo "Could not find cmake executable"
+    exit 1
 fi
 
 rm -r build/
