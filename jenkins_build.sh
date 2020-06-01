@@ -36,7 +36,7 @@ source update_dependencies.sh
 ./new_build.sh
 
 # Perform repo tests
-cd "${tests}"
+cd "build/${tests}"
 ./test_${repo}
 
 # Check for failed tests
