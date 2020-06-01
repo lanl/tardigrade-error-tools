@@ -11,7 +11,7 @@ else
 fi
 
 # Clean and build repo tests
-rm -r build/
+rm -rf build/
 mkdir build
 cd build
 ${cmake_exec} ..
