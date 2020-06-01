@@ -36,7 +36,6 @@ namespace errorTools{
             bool errorReplace = false;
             std::unique_ptr<Node> next;
 
-        // Constructors
         public:
 
             /**
