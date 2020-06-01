@@ -1,0 +1,8 @@
+set(CMAKE_TEST_NAME "test_${CMAKE_PROJECT_NAME}") 
+
+add_executable (${CMAKE_TEST_NAME} "${CMAKE_TEST_NAME}.cpp")
+add_test(NAME ${CMAKE_TEST_NAME} COMMAND ${CMAKE_TEST_NAME})
+
+set_target_properties(${CMAKE_TEST_NAME} PROPERTIES CXX_STANDARD 11)
+
+target_link_libraries(${CMAKE_TEST_NAME} PUBLIC ${CMAKE_PROJECT_NAME})
