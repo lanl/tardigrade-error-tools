@@ -27,35 +27,55 @@ this command will change on different platforms.
 
 ---
 
-## Building the documentation:
+## Building the documentation
 
-1) Create the build directory
+A build script has been created for convenience, ``new_build.sh``. It will build
+everything including the library binary, the test binary, and the documentation.
+This is the same build script used by ``jenkins_build.sh`` for CI builds and
+testing.
 
-```
-mkdir build/
-cd build/
-```
+### sstelmo
 
-2) Set the environment CXX variable
-
-```
-export CXX=g++
-```
-
-3) Run cmake3
+1) Activate the correct python environment
 
 ```
-cmake3 ..
+$ source /apps/anaconda/5.0.1-python-3.6/bin/activate
+$ source activate /projects/python/release-cpp
 ```
 
-4) Run make
+2) Create the build directory and move there
 
 ```
-make
+$ pwd
+/path/to/error_tools/
+$ mkdir build/
+$ cd build/
+```
+
+3) Run cmake3 configuration
+
+```
+$ pwd
+/path/to/error_tools/build/
+$ cmake3 ..
+```
+
+4) Build the docs
+
+```
+$ cmake3 --build docs
 ```
 
 5) Documentation builds to: 
 
 ```
-.../error_tools/build/docs/sphinx/index.html
+error_tools/build/docs/sphinx/index.html
+```
+
+6) Display docs
+
+```
+$ pwd
+/path/to/error_tools/build/
+firefox docs/sphinx/index.html &
 ```
