@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * error_tools.cpp
+  * \file error_tools.cpp
   ******************************************************************************
   * A collection of tools for error handling in C++ code. This is a lightweight
   * library intended to cause minimal extra burden but can use very useful for
