@@ -29,6 +29,9 @@ this command will change on different platforms.
 
 ## Building the documentation
 
+> **API Health Note**: The sphinx API docs are a work-in-progress. The doxygen
+> API is much more useful
+
 A build script has been created for convenience, ``new_build.sh``. It will build
 everything including the library binary, the test binary, and the documentation.
 This is the same build script used by ``jenkins_build.sh`` for CI builds and
@@ -78,4 +81,13 @@ error_tools/build/docs/sphinx/index.html
 $ pwd
 /path/to/error_tools/build/
 firefox docs/sphinx/index.html &
+```
+
+7) While the Sphinx API is still a WIP, try the doxygen API
+
+
+```
+$ pwd
+/path/to/error_tools/build/
+firefox docs/doxygen/html/index.html &
 ```
