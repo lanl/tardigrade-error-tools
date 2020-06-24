@@ -1,6 +1,9 @@
 cmake_minimum_required (VERSION 3.14)
 
-project (error_tools)
+project (error_tools VERSION 0.0.1)
+
+# Configure version
+configure_file("src/cpp/config.h.in" "${PROJECT_BINARY_DIR}/config.h")
 
 # Add the cmake folder to locate the FindSphinx module
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
