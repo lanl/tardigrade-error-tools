@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Make bash script more like high-level languages.
-set -Eeuxo pipefail
-
 # Identify common paths automatically
 case $OSTYPE in
     darwin*)
@@ -30,6 +27,9 @@ else
     source activate
     source activate "${projects}/python/${rel}"
 fi
+
+# Make bash script more like high-level languages.
+set -Eeuxo pipefail
 
 # Check conda environment for debugging
 conda info | grep default
