@@ -31,9 +31,6 @@ fi
 # Make bash script more like high-level languages.
 set -Eeuxo pipefail
 
-# Check conda environment for debugging
-conda info | grep default
-
 # Clone and update dependencies
 source update_dependencies.sh
 
