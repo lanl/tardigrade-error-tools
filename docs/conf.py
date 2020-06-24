@@ -23,8 +23,6 @@ copyright = '2020, Nathan A. Miller and Kyle A. Brindley'
 author = 'Nathan A. Miller and Kyle A. Brindley'
 
 # The full version, including alpha/beta/rc tags
-import pdb
-pdb.set_trace()
 git_describe = os.popen('git describe --always --dirty --tags').read().strip()
 with open("../CMakeLists.txt") as config:
     contents = config.read()
@@ -34,6 +32,8 @@ if version_search:
     release = version_search.group(1)
 else:
     release = git_describe
+if release != git_describe:
+    release = release + f"+{git_describe}"
 version = release
 
 
