@@ -57,6 +57,8 @@ namespace errorTools{
 
             void addNext(Node *newNode);
 
+            void addNext( std::unique_ptr< Node > &newNode );
+
             void print( const bool header = true );
     };
 }
