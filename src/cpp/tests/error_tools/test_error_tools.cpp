@@ -104,6 +104,61 @@ int testPrint(std::ofstream &results){
     return 0;
 }
 
+int safeTestPrint(std::ofstream &results){
+    /*!
+     * Test of the print utility using safe pointers
+     *
+     * :param std::ofstream &results: The output file
+     */
+
+    std::unique_ptr< errorTools::Node > n4;
+    n4.reset( new errorTools::Node("fxn4", "problem in addition\n") );
+
+    std::unique_ptr< errorTools::Node > n3;
+    n3.reset( new errorTools::Node("fxn3", "error in fxn4\n") );
+    n3->addNext(n4);
+
+    std::unique_ptr< errorTools::Node > n2;
+    n2.reset( new errorTools::Node("fxn2", "error in fxn3\n") );
+    n2->addNext(n3);
+    
+    errorTools::Node n1("fxn1", "error in fxn2\n");
+    n1.addNext(n2);
+
+    std::stringbuf buffer;
+    cerr_redirect rd(&buffer);
+
+    n1.print( );
+
+    std::string result = buffer.str();
+    std::string answer = "\n***************\n"
+                           "*    ERROR    *\n"
+                           "***************\n\n"
+                         "In function fxn1\n"
+                         "\terror in fxn2\n"
+                         "\t\n"
+                         "In function fxn2\n"
+                         "\terror in fxn3\n"
+                         "\t\n"
+                         "In function fxn3\n"
+                         "\terror in fxn4\n"
+                         "\t\n"
+                         "In function fxn4\n"
+                         "\tproblem in addition\n"
+                         "\t\n"
+                         "\n***************************\n"
+                           "*    END ERROR MESSAGE    *\n"
+                           "***************************\n";
+
+    if (result.compare(answer) != 0){
+        std::cout << "result.compare( answer ) " << result.compare( answer ) << "\n";
+        results << "safeTestPrint & False\n";
+        return 1;
+    }
+    results << "safeTestPrint & True\n";
+    return 0;
+}
+
 int main(){
     /*!
     The main loop which runs the tests defined in the 
@@ -119,6 +174,7 @@ int main(){
     //Run the tests
     testReplaceAll(results);
     testPrint(results);
+    safeTestPrint(results);
 
     //Close the results file
     results.close();

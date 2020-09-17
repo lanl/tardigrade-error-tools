@@ -12,12 +12,24 @@
 
 namespace errorTools{
 
-    void replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    void replaceAll( std::string& str, const std::string& from, const std::string& to ) {
         size_t start_pos = 0;
-        while((start_pos = str.find(from, start_pos)) != std::string::npos) {
-                 str.replace(start_pos, from.length(), to);
-                 start_pos += to.length(); // ...
+        while ( ( start_pos = str.find( from, start_pos ) ) != std::string::npos ) {
+                 str.replace( start_pos, from.length( ), to );
+                 start_pos += to.length( ); // ...
         }
+    }
+
+    /**
+      * Add another layer to the errors
+      *
+      * Will be depreciated because it encourages unsafe coding practices
+      *
+      * \param Node &newNode: The new node to be added
+      */
+    void Node::addNext( Node *newNode ){
+        this->next.reset( newNode );
+        return;
     }
 
     /**
@@ -25,8 +37,8 @@ namespace errorTools{
       *
       * \param Node &newNode: The new node to be added
       */
-    void Node::addNext(Node *newNode){
-        this->next.reset(newNode);
+    void Node::addNext( std::unique_ptr< Node > &newNode ){
+        this->next = std::move( newNode );
         return;
     }
 
