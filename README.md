@@ -42,11 +42,11 @@ testing.
 
 ### sstelmo
 
-1) Activate the correct python environment
+1) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 
 ```
-$ source "/apps/anaconda/2019.10-python-3.7/etc/profile.d/conda.sh"
-$ conda activate /projects/python/release
+$ module load python/2019.10-python-3.7
+$ sv3r
 ```
 
 2) Create the build directory and move there
