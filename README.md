@@ -1,21 +1,24 @@
 # error\_tools
 
-A collection of tools used for error handling. These tools provide a linked 
-list class which can help a user both understand where an error happened 
+A collection of tools used for error handling. These tools provide a linked
+list class which can help a user both understand where an error happened
 and also help the developer to correct for the errors.
 
 Note: In order to use the Intel compiler one must run the following command in a
-bash prompt: source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform
-linux
+bash prompt:
 
-This is the same command that the abaqus command issues. It may be that 
+```
+source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform linux
+```
+
+This is the same command that the abaqus command issues. It may be that
 this command will change on different platforms.
 
 ---
 
 ---
 
-## Dependencies: 
+## Dependencies:
 
 * CMake
 * Doxygen
@@ -42,8 +45,8 @@ testing.
 1) Activate the correct python environment
 
 ```
-$ source /apps/anaconda/5.0.1-python-3.6/bin/activate
-$ source activate /projects/python/release-cpp
+$ source "/apps/anaconda/2019.10-python-3.7/etc/profile.d/conda.sh"
+$ conda activate /projects/python/release
 ```
 
 2) Create the build directory and move there
@@ -69,7 +72,7 @@ $ cmake3 ..
 $ cmake3 --build docs
 ```
 
-5) Documentation builds to: 
+5) Documentation builds to:
 
 ```
 error_tools/build/docs/sphinx/index.html
@@ -80,7 +83,7 @@ error_tools/build/docs/sphinx/index.html
 ```
 $ pwd
 /path/to/error_tools/build/
-firefox docs/sphinx/index.html &
+$ firefox docs/sphinx/index.html &
 ```
 
 7) While the Sphinx API is still a WIP, try the doxygen API
@@ -89,5 +92,5 @@ firefox docs/sphinx/index.html &
 ```
 $ pwd
 /path/to/error_tools/build/
-firefox docs/doxygen/html/index.html &
+$ firefox docs/doxygen/html/index.html &
 ```
