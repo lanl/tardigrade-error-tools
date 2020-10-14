@@ -20,11 +20,16 @@ this command will change on different platforms.
 
 ## Dependencies:
 
-* CMake
-* Doxygen
-* Sphinx
-* Breathe
-* sphinx\_rtd\_theme
+### Executables
+
+* CMake >= 3.14
+* Doxygen >= 1.8.5
+
+### Python Modules (for documentation)
+
+* Sphinx >= 3.0.4
+* Breathe >= 4.18.1
+* sphinx\_rtd\_theme >= 0.4.3
 
 ---
 
