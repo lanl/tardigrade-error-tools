@@ -31,6 +31,16 @@ this command will change on different platforms.
 * Breathe >= 4.18.1
 * sphinx\_rtd\_theme >= 0.4.3
 
+For convenience, the minimal Python environment requirements for the
+documentation build are included in ``environment.yaml`` and
+``requirements.txt``. A minimal anaconda environment for building the
+documentation can be created from an existing anaconda installation with the
+following commands.
+
+```
+$ conda env create --file environment.yaml
+```
+
 ---
 
 ---
