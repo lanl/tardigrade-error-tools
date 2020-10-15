@@ -1,27 +1,45 @@
 # error\_tools
 
-A collection of tools used for error handling. These tools provide a linked 
-list class which can help a user both understand where an error happened 
+A collection of tools used for error handling. These tools provide a linked
+list class which can help a user both understand where an error happened
 and also help the developer to correct for the errors.
 
 Note: In order to use the Intel compiler one must run the following command in a
-bash prompt: source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform
-linux
+bash prompt:
 
-This is the same command that the abaqus command issues. It may be that 
+```
+source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform linux
+```
+
+This is the same command that the abaqus command issues. It may be that
 this command will change on different platforms.
 
 ---
 
 ---
 
-## Dependencies: 
+## Dependencies:
 
-* CMake
-* Doxygen
-* Sphinx
-* Breathe
-* sphinx\_rtd\_theme
+### Executables
+
+* CMake >= 3.14
+* Doxygen >= 1.8.5
+
+### Python Modules (for documentation)
+
+* Sphinx >= 3.0.4
+* Breathe >= 4.18.1
+* sphinx\_rtd\_theme >= 0.4.3
+
+For convenience, the minimal Python environment requirements for the
+documentation build are included in ``environment.yaml`` and
+``requirements.txt``. A minimal anaconda environment for building the
+documentation can be created from an existing anaconda installation with the
+following commands.
+
+```
+$ conda env create --file environment.yaml
+```
 
 ---
 
@@ -39,11 +57,11 @@ testing.
 
 ### sstelmo
 
-1) Activate the correct python environment
+1) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 
 ```
-$ source /apps/anaconda/5.0.1-python-3.6/bin/activate
-$ source activate /projects/python/release-cpp
+$ module load python/2019.10-python-3.7
+$ sv3r
 ```
 
 2) Create the build directory and move there
@@ -69,7 +87,7 @@ $ cmake3 ..
 $ cmake3 --build docs
 ```
 
-5) Documentation builds to: 
+5) Documentation builds to:
 
 ```
 error_tools/build/docs/sphinx/index.html
@@ -80,7 +98,7 @@ error_tools/build/docs/sphinx/index.html
 ```
 $ pwd
 /path/to/error_tools/build/
-firefox docs/sphinx/index.html &
+$ firefox docs/sphinx/index.html &
 ```
 
 7) While the Sphinx API is still a WIP, try the doxygen API
@@ -89,5 +107,5 @@ firefox docs/sphinx/index.html &
 ```
 $ pwd
 /path/to/error_tools/build/
-firefox docs/doxygen/html/index.html &
+$ firefox docs/doxygen/html/index.html &
 ```
