@@ -1,8 +1,16 @@
-//Tests for error_tools
+/**
+  * \file test_error_tools.cpp
+  *
+  * Tests for error_tools
+  */
 
 #include<error_tools.h>
 #include<sstream>
 #include<fstream>
+
+#define BOOST_TEST_MAIN
+#include <boost/test/unit_test.hpp>
+#include <boost/test/output_test_stream.hpp>
 
 struct cout_redirect{
     cout_redirect( std::streambuf * new_buffer)
@@ -30,11 +38,9 @@ struct cerr_redirect{
         std::streambuf * old;
 };
 
-int testReplaceAll(std::ofstream &results){
+BOOST_AUTO_TEST_CASE( testReplaceAll ){
     /*!
      * Test of the replaceAll function
-     *
-     * :param std::ofstream &results: The output file
      */
 
     std::string test = "The quick\n brown fox jum\nped over the \nlazy dog\n";
@@ -42,19 +48,12 @@ int testReplaceAll(std::ofstream &results){
 
     std::string result = "The quick? brown fox jum?ped over the ?lazy dog?";
 
-    if (result.compare(test) != 0){
-        results << "testReplaceAll & False\n";
-        return 1;
-    }
-    results << "testReplaceAll & True\n";
-    return 0;
+    BOOST_CHECK( result.compare(test) != 0 );
 }
 
-int testPrint(std::ofstream &results){
+BOOST_AUTO_TEST_CASE( testPrint ){
     /*!
      * Test of the print utility
-     *
-     * :param std::ofstream &results: The output file
      */
 
     errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition\n");
@@ -68,14 +67,12 @@ int testPrint(std::ofstream &results){
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
+    boost::test_tools::output_test_stream result; 
+    {
+        cerr_redirect guard( result.rdbuf() );
+        n1.print( );
+    }
 
-
-    std::stringbuf buffer;
-    cerr_redirect rd(&buffer);
-
-    n1.print( );
-
-    std::string result = buffer.str();
     std::string answer = "\n***************\n"
                            "*    ERROR    *\n"
                            "***************\n\n"
@@ -95,20 +92,12 @@ int testPrint(std::ofstream &results){
                            "*    END ERROR MESSAGE    *\n"
                            "***************************\n";
 
-    if (result.compare(answer) != 0){
-        std::cout << "result.compare( answer ) " << result.compare( answer ) << "\n";
-        results << "testPrint & False\n";
-        return 1;
-    }
-    results << "testPrint & True\n";
-    return 0;
+    BOOST_CHECK( result.is_equal(answer) );
 }
 
-int safeTestPrint(std::ofstream &results){
+BOOST_AUTO_TEST_CASE( safeTestPrint ){
     /*!
      * Test of the print utility using safe pointers
-     *
-     * :param std::ofstream &results: The output file
      */
 
     std::unique_ptr< errorTools::Node > n4;
@@ -125,12 +114,12 @@ int safeTestPrint(std::ofstream &results){
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
-    std::stringbuf buffer;
-    cerr_redirect rd(&buffer);
+    boost::test_tools::output_test_stream result; 
+    {
+        cerr_redirect guard( result.rdbuf() );
+        n1.print( );
+    }
 
-    n1.print( );
-
-    std::string result = buffer.str();
     std::string answer = "\n***************\n"
                            "*    ERROR    *\n"
                            "***************\n\n"
@@ -150,42 +139,5 @@ int safeTestPrint(std::ofstream &results){
                            "*    END ERROR MESSAGE    *\n"
                            "***************************\n";
 
-    if (result.compare(answer) != 0){
-        std::cout << "result.compare( answer ) " << result.compare( answer ) << "\n";
-        results << "safeTestPrint & False\n";
-        return 1;
-    }
-    results << "safeTestPrint & True\n";
-    return 0;
-}
-
-int main(){
-    /*!
-    The main loop which runs the tests defined in the
-    accompanying functions. Each function should output
-    the function name followed by & followed by True or False
-    if the test passes or fails respectively.
-    */
-
-    //Open the results file
-    std::ofstream results;
-    results.open("results.tex");
-
-    //Run the tests
-    int testReplaceAllExitCode = testReplaceAll(results);
-    int testPrintExitCode = testPrint(results);
-    int safeTestPrintExitCode = safeTestPrint(results);
-
-    //Close the results file
-    results.close();
-
-    //Check exit codes
-    if ((testReplaceAllExitCode != 0) || \
-        (testPrintExitCode != 0) || \
-        (safeTestPrintExitCode != 0)){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    BOOST_CHECK( result.is_equal(answer) );
 }
