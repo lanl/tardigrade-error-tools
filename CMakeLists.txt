@@ -15,7 +15,7 @@ include_directories("src/cpp")
 add_subdirectory ("src/cpp")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     # Find Boost. Required for tests
-    find_package(Boost REQUIRED COMPONENTS unit_test_framework)
+    find_package(Boost 1.53.0 REQUIRED COMPONENTS unit_test_framework)
     # Add tests and docs
     add_subdirectory ("src/cpp/tests")
     add_subdirectory ("docs")
