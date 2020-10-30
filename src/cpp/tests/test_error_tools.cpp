@@ -8,8 +8,8 @@
 #include<sstream>
 #include<fstream>
 
-#define BOOST_TEST_MAIN
-#include <boost/test/unit_test.hpp>
+#define BOOST_TEST_MODULE test_error_tools
+#include <boost/test/included/unit_test.hpp>
 #include <boost/test/output_test_stream.hpp>
 
 struct cout_redirect{
