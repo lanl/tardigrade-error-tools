@@ -50,10 +50,4 @@ esac
 
 # Perform repo tests
 cd "build"
-ctest
-
-# Check for failed tests
-cd "${tests}"
-if grep -i false results.tex; then
-    exit 1
-fi
+ctest --verbose --output-log results.tex
