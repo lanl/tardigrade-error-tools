@@ -11,7 +11,7 @@ Welcome to error_tools's documentation!
    :maxdepth: 2
    :caption: Contents
 
-   error_tools
+   api
 
 ==================
 Indices and tables
