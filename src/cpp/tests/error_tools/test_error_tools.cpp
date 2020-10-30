@@ -64,7 +64,7 @@ int testPrint(std::ofstream &results){
 
     errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3\n");
     n2->addNext(n3);
-    
+
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
@@ -121,7 +121,7 @@ int safeTestPrint(std::ofstream &results){
     std::unique_ptr< errorTools::Node > n2;
     n2.reset( new errorTools::Node("fxn2", "error in fxn3\n") );
     n2->addNext(n3);
-    
+
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
@@ -161,9 +161,9 @@ int safeTestPrint(std::ofstream &results){
 
 int main(){
     /*!
-    The main loop which runs the tests defined in the 
+    The main loop which runs the tests defined in the
     accompanying functions. Each function should output
-    the function name followed by & followed by True or False 
+    the function name followed by & followed by True or False
     if the test passes or fails respectively.
     */
 
@@ -172,12 +172,20 @@ int main(){
     results.open("results.tex");
 
     //Run the tests
-    testReplaceAll(results);
-    testPrint(results);
-    safeTestPrint(results);
+    int testReplaceAllExitCode = testReplaceAll(results);
+    int testPrintExitCode = testPrint(results);
+    int safeTestPrintExitCode = safeTestPrint(results);
 
     //Close the results file
     results.close();
 
-    return 0;
+    //Check exit codes
+    if ((testReplaceAllExitCode != 0) || \
+        (testPrintExitCode != 0) || \
+        (safeTestPrintExitCode != 0)){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
