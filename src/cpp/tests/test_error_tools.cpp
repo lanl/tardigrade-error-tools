@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE( testReplaceAll ){
 
     std::string result = "The quick? brown fox jum?ped over the ?lazy dog?";
 
-    BOOST_CHECK( result.compare(test) != 0 );
+    BOOST_CHECK( result == test );
 }
 
 BOOST_AUTO_TEST_CASE( testPrint ){
