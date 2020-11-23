@@ -39,6 +39,11 @@ namespace errorTools{
         public:
 
             /**
+              * The default constructor
+              */
+            Node(){
+            }
+            /**
               * Create a node in the error string
               *
               * \param functionName std::string The function name within which the error was created
