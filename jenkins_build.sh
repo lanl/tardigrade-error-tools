@@ -51,3 +51,7 @@ esac
 # Perform repo tests
 cd "build"
 ctest --verbose --output-log results.tex
+
+#=============================================================== RUN PYTESTS ===
+./pytest_${repo}.sh
+cd ${workdir}
