@@ -53,5 +53,6 @@ cd "build"
 ctest --verbose --output-log results.tex
 
 #=============================================================== RUN PYTESTS ===
+cd ${workdir}
 ./pytest_${repo}.sh
 cd ${workdir}
