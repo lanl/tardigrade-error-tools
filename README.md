@@ -109,3 +109,38 @@ $ pwd
 /path/to/error_tools/build/
 $ firefox docs/doxygen/html/index.html &
 ```
+
+---
+
+---
+
+## Building the python interface
+
+A python interface to the ``error_tools`` C++ routines is provided. After the
+libraries have been built, they can be linked so that they can be called with
+python. 
+
+### sstelmo
+
+1) Build the libraries
+
+```
+$ pwd
+/path/to/error_tools
+$ ./new_build.sh g++
+```
+
+2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
+
+```
+$ module load python/2019.10-python-3.7
+$ sv3r
+```
+
+3) in the ``src/python`` directory build the interface using ``cython``
+
+```
+$ pwd
+/path/to/src/python
+$ python setup.py build_ext --inplace
+```
