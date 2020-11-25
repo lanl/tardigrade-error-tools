@@ -122,14 +122,22 @@ python.
 
 ### sstelmo
 
-1) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
+1) Build the libraries
+
+```
+$ pwd
+/path/to/error_tools
+$ ./new_build.sh g++
+```
+
+2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 
 ```
 $ module load python/2019.10-python-3.7
 $ sv3r
 ```
 
-2) in the ``src/python`` directory build the interface using ``cython``
+3) in the ``src/python`` directory build the interface using ``cython``
 
 ```
 $ pwd
