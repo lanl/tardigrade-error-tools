@@ -5,16 +5,15 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 import numpy
 
+import settings
 
-# Set the build directory
-build_directory = os.path.join('..', '..', 'build')
 
 # Search the tree for the static libraries and the include directories
 static_libraries = []
-include_dirs = [os.path.abspath(os.path.join('..', 'cpp'))]
+include_dirs = [settings.CPP_SOURCE_DIRECTORY]
 
 # Search the build directory
-for root, dirs, files in os.walk(build_directory):
+for root, dirs, files in os.walk(settings.CPP_BUILD_DIRECTORY):
     for file in files:
         if file.endswith('.a'):
             static_libraries.append(os.path.abspath(os.path.join(root, file)))
@@ -28,7 +27,7 @@ print(include_dirs)
 
 # Define the build configuration
 ext_modules = [Extension("error_tools",
-                     ["error_tools.pyx"],
+                     sources=["error_tools.pyx"],
                      language='c++',
                      extra_objects=static_libraries,
                      include_dirs=include_dirs,
