@@ -22,9 +22,6 @@ for root, dirs, files in os.walk(settings.CPP_BUILD_DIRECTORY):
         if ("cpp" in dir) and ("_deps" in dir):
             include_dirs.append(os.path.join(root, dir))
 
-print(static_libraries)
-print(include_dirs)
-
 # Define the build configuration
 ext_modules = [Extension("error_tools",
                      sources=["error_tools.pyx"],
