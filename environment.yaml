@@ -6,6 +6,7 @@ dependencies:
   - sphinx>=3.0.4
   - sphinx_rtd_theme>=0.4.3
   - cython
+  - pytest
   - pip
   - pip:
     - --requirement requirements.txt

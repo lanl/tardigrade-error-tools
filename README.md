@@ -8,7 +8,7 @@ Note: In order to use the Intel compiler one must run the following command in a
 bash prompt:
 
 ```
-source /apps/intel2016/bin/ifortvars.sh -arch intel64 -platform linux
+source /path/to/ifortvars.sh -arch intel64 -platform linux
 ```
 
 This is the same command that the abaqus command issues. It may be that
@@ -57,11 +57,10 @@ testing.
 
 ### sstelmo
 
-1) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
+1) Activate the python environment.
 
 ```
-$ module load python/2019.10-python-3.7
-$ sv3r
+$ conda activate environment
 ```
 
 2) Create the build directory and move there
@@ -130,11 +129,10 @@ $ pwd
 $ ./new_build.sh g++
 ```
 
-2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
+2) Activate the python environment
 
 ```
-$ module load python/2019.10-python-3.7
-$ sv3r
+$ conda activate environment
 ```
 
 3) in the ``src/python`` directory build the interface using ``cython``
