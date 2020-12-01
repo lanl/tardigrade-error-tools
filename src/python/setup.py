@@ -23,7 +23,7 @@ for root, dirs, files in os.walk(settings.CPP_BUILD_DIRECTORY):
 
 # Define the build configuration
 ext_modules = [Extension("error_tools",
-                     sources=["error_tools_python.pyx"],
+                     sources=["main.pyx"],
                      language='c++',
                      extra_objects=static_libraries,
                      include_dirs=include_dirs,
