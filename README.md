@@ -41,7 +41,7 @@ everything including the library binary, the test binary, and the documentation.
 This is the same build script used by ``jenkins_build.sh`` for CI builds and
 testing.
 
-### sstelmo
+### build process
 
 1) Activate the python environment.
 
@@ -105,7 +105,7 @@ A python interface to the ``error_tools`` C++ routines is provided. After the
 libraries have been built, they can be linked so that they can be called with
 python. 
 
-### sstelmo
+### build process
 
 1) Build the libraries
 
