@@ -4,16 +4,6 @@ A collection of tools used for error handling. These tools provide a linked
 list class which can help a user both understand where an error happened
 and also help the developer to correct for the errors.
 
-Note: In order to use the Intel compiler one must run the following command in a
-bash prompt:
-
-```
-source /path/to/ifortvars.sh -arch intel64 -platform linux
-```
-
-This is the same command that the abaqus command issues. It may be that
-this command will change on different platforms.
-
 ---
 
 ---
@@ -25,17 +15,13 @@ this command will change on different platforms.
 * CMake >= 3.14
 * Doxygen >= 1.8.5
 
-### Python Modules (for documentation)
-
-* Sphinx >= 3.0.4
-* Breathe >= 4.18.1
-* sphinx\_rtd\_theme >= 0.4.3
+### Python Modules
 
 For convenience, the minimal Python environment requirements for the
 documentation build are included in ``environment.yaml`` and
 ``requirements.txt``. A minimal anaconda environment for building the
-documentation can be created from an existing anaconda installation with the
-following commands.
+documentation and the python interface can be created from an existing
+anaconda installation with the following commands.
 
 ```
 $ conda env create --file environment.yaml
