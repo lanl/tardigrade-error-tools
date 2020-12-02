@@ -1,2 +1,2 @@
 mkdir build
-touch build results.tex
+touch build/results.tex
