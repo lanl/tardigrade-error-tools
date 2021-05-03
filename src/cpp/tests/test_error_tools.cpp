@@ -163,4 +163,9 @@ BOOST_AUTO_TEST_CASE( safeTestPrint ){
     n1.print( );
     BOOST_CHECK( result.is_equal(answer) );
 
+    //Check for no header
+    answer = body;
+    n1.print( false );
+    BOOST_CHECK( result.is_equal(answer) );
+
 }
