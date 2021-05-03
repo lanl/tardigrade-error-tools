@@ -66,12 +66,12 @@ BOOST_AUTO_TEST_CASE( testPrint ){
     cout_redirect guard( result.rdbuf() );
 
     //Initialize test error node stack
-    errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition");
+    errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition\n");
 
-    errorTools::Node *n3 = new errorTools::Node("fxn3", "error in fxn4");
+    errorTools::Node *n3 = new errorTools::Node("fxn3", "error in fxn4\n");
     n3->addNext(n4);
 
-    errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3");
+    errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3\n");
     n2->addNext(n3);
 
     errorTools::Node n1("fxn1", "error in fxn2\n");
