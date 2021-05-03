@@ -56,43 +56,57 @@ BOOST_AUTO_TEST_CASE( testPrint ){
      * Test of the print utility
      */
 
-    errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition\n");
+    //Setup redirect variables for stdout
+    std::stringbuf buffer;
+    cout_redirect rd(&buffer);
+    boost::test_tools::output_test_stream result;
 
-    errorTools::Node *n3 = new errorTools::Node("fxn3", "error in fxn4\n");
+    //Initialize test variables
+    std::string answer;
+    cout_redirect guard( result.rdbuf() );
+
+    //Initialize test error node stack
+    errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition");
+
+    errorTools::Node *n3 = new errorTools::Node("fxn3", "error in fxn4");
     n3->addNext(n4);
 
-    errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3\n");
+    errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3");
     n2->addNext(n3);
 
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
-    boost::test_tools::output_test_stream result; 
-    {
-        cerr_redirect guard( result.rdbuf() );
-        n1.print( );
-    }
-
-    std::string answer = "\n***************\n"
+    //Construct expected strings
+    std::string header = "\n***************\n"
                            "*    ERROR    *\n"
-                           "***************\n\n"
-                         "In function fxn1\n"
-                         "\terror in fxn2\n"
-                         "\t\n"
-                         "In function fxn2\n"
-                         "\terror in fxn3\n"
-                         "\t\n"
-                         "In function fxn3\n"
-                         "\terror in fxn4\n"
-                         "\t\n"
-                         "In function fxn4\n"
-                         "\tproblem in addition\n"
-                         "\t\n"
-                         "\n***************************\n"
+                           "***************\n\n";
+    std::string body = "In function fxn1\n"
+                       "\terror in fxn2\n"
+                       "\t\n"
+                       "In function fxn2\n"
+                       "\terror in fxn3\n"
+                       "\t\n"
+                       "In function fxn3\n"
+                       "\terror in fxn4\n"
+                       "\t\n"
+                       "In function fxn4\n"
+                       "\tproblem in addition\n"
+                       "\t\n";
+    std::string footer = "\n***************************\n"
                            "*    END ERROR MESSAGE    *\n"
                            "***************************\n";
 
+    //Test print with headers
+    answer = header + body + footer;
+    n1.print( );
     BOOST_CHECK( result.is_equal(answer) );
+
+    //Check for no header
+    answer = body;
+    n1.print( false );
+    BOOST_CHECK( result.is_equal(answer) );
+
 }
 
 BOOST_AUTO_TEST_CASE( safeTestPrint ){
@@ -114,7 +128,7 @@ BOOST_AUTO_TEST_CASE( safeTestPrint ){
     errorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
-    boost::test_tools::output_test_stream result; 
+    boost::test_tools::output_test_stream result;
     {
         cerr_redirect guard( result.rdbuf() );
         n1.print( );
