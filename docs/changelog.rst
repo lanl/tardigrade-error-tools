@@ -11,6 +11,7 @@ Changelog
 Bug fixes
 =========
 - Only print the footer when the header is requested (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
+- Fix the Doxygen/Sphinx dependence order (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
 
 Internal Changes
 ================
