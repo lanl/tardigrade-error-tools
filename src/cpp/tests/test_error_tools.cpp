@@ -58,12 +58,12 @@ BOOST_AUTO_TEST_CASE( testPrint ){
 
     //Setup redirect variables for stdout
     std::stringbuf buffer;
-    cout_redirect rd(&buffer);
+    cerr_redirect rd(&buffer);
     boost::test_tools::output_test_stream result;
 
     //Initialize test variables
     std::string answer;
-    cout_redirect guard( result.rdbuf() );
+    cerr_redirect guard( result.rdbuf() );
 
     //Initialize test error node stack
     errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition\n");
