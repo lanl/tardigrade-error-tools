@@ -15,8 +15,8 @@ namespace errorTools{
     void replaceAll( std::string& str, const std::string& from, const std::string& to ) {
         size_t start_pos = 0;
         while ( ( start_pos = str.find( from, start_pos ) ) != std::string::npos ) {
-                 str.replace( start_pos, from.length( ), to );
-                 start_pos += to.length( ); // ...
+            str.replace( start_pos, from.length( ), to );
+            start_pos += to.length( ); // ...
         }
     }
 
@@ -45,7 +45,7 @@ namespace errorTools{
     /**
       * Print the errors in a list of nodes.
       *
-      * \param header const bool Flag which indicates if the header 
+      * \param header const bool Flag which indicates if the header
       *     should be printed
       *
       */
@@ -58,18 +58,18 @@ namespace errorTools{
 
         std::cerr << "In function " << functionName << "\n";
 
-        if (!errorReplace){
-            replaceAll(error, "\n", "\n\t");
+        if ( !errorReplace ){
+            replaceAll( error, "\n", "\n\t" );
             errorReplace = true;
         }
 
         std::cerr << "\t" << error << "\n";
 
-        if (next != NULL){
+        if ( next != NULL ){
             next->print( false );
         }
 
-        else {
+        if ( header ){
             std::cerr << "\n***************************\n";
             std::cerr <<   "*    END ERROR MESSAGE    *\n";
             std::cerr <<   "***************************\n";
