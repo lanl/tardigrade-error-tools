@@ -35,7 +35,8 @@ set -Eeuxo pipefail
 conda info
 
 # Set some common shell variables
-source set_vars.sh
+repo='error_tools'
+workdir=${PWD}
 
 # Clean and build repo tests
 case $OSTYPE in
