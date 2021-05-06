@@ -4,3 +4,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC .)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11)
 target_compile_options(${PROJECT_NAME} PUBLIC
                        -Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb)
+
+install(TARGETS ${PROJECT_NAME}
+        LIBRARY
+        PUBLIC_HEADER)
