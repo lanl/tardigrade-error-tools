@@ -7,5 +7,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11
 target_compile_options(${PROJECT_NAME} PUBLIC
                        -Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb)
 install(TARGETS ${PROJECT_NAME}
-        LIBRARY
-        PUBLIC_HEADER)
+        EXPORT ${PROJECT_NAME}_Targets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
