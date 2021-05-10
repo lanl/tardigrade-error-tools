@@ -8,6 +8,8 @@
   ******************************************************************************
   */
 
+#include<config.h>
+
 #ifndef ERROR_TOOLS_H
 #define ERROR_TOOLS_H
 

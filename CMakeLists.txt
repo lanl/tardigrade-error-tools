@@ -12,8 +12,9 @@ include(GNUInstallDirs)
 # Make the code position independent
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Configure version
-configure_file("src/cpp/config.h.in" "${PROJECT_BINARY_DIR}/config.h")
+# Configure version and add to include directory
+configure_file("src/cpp/config.h.in" "${PROJECT_BINARY_DIR}/${CPP_SRC_PATH}/config.h")
+include_directories("${PROJECT_BINARY_DIR}/${CPP_SRC_PATH}")
 
 # Add the cmake folder to locate the FindSphinx module
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
