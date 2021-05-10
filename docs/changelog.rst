@@ -8,6 +8,11 @@ Changelog
 0.1.1 (unreleased)
 ******************
 
+New Features
+============
+- Add deploy CMake files for build, deploy, discovery, and version comparisons (:jira:`623`, :pull:`31`). By `Kyle
+  Brindley`_.
+
 Bug fixes
 =========
 - Only print the footer when the header is requested (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
