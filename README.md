@@ -6,8 +6,6 @@ and also help the developer to correct for the errors.
 
 ---
 
----
-
 ## Dependencies:
 
 ### Executables
@@ -28,8 +26,6 @@ documentation can be created from an existing anaconda installation with the
 following commands.
 
     $ conda env create --file environment.yaml
-
----
 
 ---
 
@@ -75,13 +71,48 @@ testing.
 
 ---
 
+## Build the library
+
+Follow the steps for building the documentation and pick up below.
+
+4) Build just the library
+
+       $ pwd
+       /path/to/error_tools/build
+       $ cmake3 --build src/cpp
+
+## Install the library
+
+Build the entire before performing the installation.
+
+4) Build the entire project
+
+       $ pwd
+       /path/to/error_tools/build
+       $ cmake3 --build .
+
+5) Install the library
+
+       $ pwd
+       /path/to/error_tools/build
+       $ cmake --install . --prefix path/to/root/install
+
+       # Example local user (non-admin) Linux install
+       $ cmake --install . --prefix /home/$USER/.local
+
+       # Example install to conda environment
+       $ cmake --install . --prefix path/to/conda/environment/
+
+       # Example install to W-13 CI/CD conda environment performed by CI/CD institutional account
+       $ cmake --install . --prefix /projects/python/release
+
 ---
 
 ## Building the python interface
 
 A python interface to the ``error_tools`` C++ routines is provided. After the
 libraries have been built, they can be linked so that they can be called with
-python. 
+python.
 
 ### sstelmo
 
@@ -96,4 +127,3 @@ python.
 3) in the ``src/python`` directory build the interface using ``cython``
 
        $ python setup.py build_ext --inplace
-
