@@ -18,7 +18,7 @@ and also help the developer to correct for the errors.
 ### Python Modules (for documentation)
 
 * Sphinx >= 3.0.4
-* Breathe >= 4.18.1
+* Breathe >= 4.30.0
 * sphinx\_rtd\_theme >= 0.4.3
 
 For convenience, the minimal Python environment requirements for the
