@@ -6,6 +6,9 @@ enable_testing()
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
 
+# Add installation directory variables
+include(GNUInstallDirs)
+
 # Make the code position independent
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
