@@ -1,7 +1,4 @@
-add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h" "config.h.in")
-target_include_directories(${PROJECT_NAME} PUBLIC
-                           INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/${CPP_SRC_PATH}>
-                                     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h.in")
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11
                                                  PUBLIC_HEADER ${PROJECT_NAME}.h)
 target_compile_options(${PROJECT_NAME} PUBLIC
