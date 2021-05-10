@@ -1,7 +1,19 @@
+# Temp files
 *.swp
-*.o
 
+# C++ and temp files
+*.o
+*.so
+
+# Documentation and c++ build artifacts
 build*/
-docs/html/
-docs/latex/
-docs/_build/
+
+# Python related files
+__pycache__
+
+# Cython build artifacts
+src/python/.coverage
+src/python/cobertura.xml
+src/python/error_tools.cpython-37m-x86_64-linux-gnu.so
+src/python/error_tools_python.cpp
+src/python/htmlcov/
