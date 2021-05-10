@@ -5,6 +5,7 @@ enable_testing()
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
+set(CMAKE_SRC_PATH "src/cmake")
 
 # Add installation directory variables
 include(GNUInstallDirs)
@@ -13,7 +14,7 @@ include(GNUInstallDirs)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add the cmake folder to locate the FindSphinx module
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 # Set the c++ standard
 set(CMAKE_CXX_STANDARD 11)
