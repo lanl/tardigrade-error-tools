@@ -20,6 +20,8 @@ Bug fixes
 - Only print the footer when the header is requested (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
 - Fix the Doxygen/Sphinx dependence order (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
 - Find the local system ``cmake3`` executable in CD scripts (:jira:`625`, :pull:`32`). By `Kyle Brindley`_.
+- Remove version templating to help downstream project find the public headers (:jira:`633`, :pull:`33`). By `Kyle
+  Brindley`_.
 
 Internal Changes
 ================
