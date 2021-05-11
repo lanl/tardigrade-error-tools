@@ -12,11 +12,14 @@ New Features
 ============
 - Add deploy CMake files for build, deploy, discovery, and version comparisons (:jira:`623`, :pull:`31`). By `Kyle
   Brindley`_.
+- Deploy the entire project (library, headers, cmake files) during CD scripts (:jira:`582`, :pull:`28`). By `Kyle
+  Brindley`_.
 
 Bug fixes
 =========
 - Only print the footer when the header is requested (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
 - Fix the Doxygen/Sphinx dependence order (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
+- Find the local system ``cmake3`` executable in CD scripts (:jira:`625`, :pull:`32`). By `Kyle Brindley`_.
 
 Internal Changes
 ================
