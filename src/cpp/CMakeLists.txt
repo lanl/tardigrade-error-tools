@@ -1,11 +1,10 @@
-add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h")
-
-target_include_directories(${PROJECT_NAME} PUBLIC .)
+add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h.in")
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11
-                                                 PUBLIC_HEADER ${PROJECT_NAME}.h)
+                                                 PUBLIC_HEADER ${PROJECT_BINARY_DIR}/${CPP_SRC_PATH}/${PROJECT_NAME}.h)
 target_compile_options(${PROJECT_NAME} PUBLIC
                        -Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb)
-
 install(TARGETS ${PROJECT_NAME}
-        LIBRARY
-        PUBLIC_HEADER)
+        EXPORT ${PROJECT_NAME}_Targets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
