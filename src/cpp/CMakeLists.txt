@@ -1,4 +1,4 @@
-add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h.in")
+add_library (${PROJECT_NAME} "${PROJECT_NAME}.cpp" "${PROJECT_NAME}.h")
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 11
                                                  PUBLIC_HEADER ${PROJECT_BINARY_DIR}/${CPP_SRC_PATH}/${PROJECT_NAME}.h)
 target_compile_options(${PROJECT_NAME} PUBLIC
