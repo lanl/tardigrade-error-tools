@@ -10,7 +10,7 @@
 
 #define BOOST_TEST_MODULE test_error_tools
 #include <boost/test/included/unit_test.hpp>
-#include <boost/test/output_test_stream.hpp>
+#include <boost/test/tools/output_test_stream.hpp>
 
 struct cout_redirect{
     cout_redirect( std::streambuf * new_buffer)
