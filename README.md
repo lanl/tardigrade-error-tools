@@ -118,7 +118,7 @@ python.
 
 1) Build the libraries
 
-       $ ./new_build.sh g++
+       $ ./new_build.sh
 
 2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 

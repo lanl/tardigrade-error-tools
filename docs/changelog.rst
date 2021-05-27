@@ -26,6 +26,8 @@ Bug fixes
 Internal Changes
 ================
 - Consolidate error node print unit tests (:jira:`582`, :pull:`28`). By `Kyle Brindley`_.
+- Remove the ``CXX`` compiler variable settings for build scripts (:jira:`665`,
+  :pull:`34`. By `Kyle Brindley`_.
 
 ******************
 0.1.0 (2020-11-30)
