@@ -1,0 +1,2 @@
+.. email addresses
+.. _`Kyle Brindley`: kbrindley@lanl.gov
