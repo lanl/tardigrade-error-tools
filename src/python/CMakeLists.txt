@@ -1,8 +1,8 @@
 set(CYTHON_SOURCE_FILES
-    main.pyx
     error_tools_python.pxd
     error_tools_python.pyx
     setup.py
+    settings.py.in
     conftest.py
 )
 configure_file(settings.py.in settings.py)
