@@ -5,6 +5,7 @@ enable_testing()
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
+set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
 
 # Add installation directory variables
@@ -13,19 +14,21 @@ include(GNUInstallDirs)
 # Make the code position independent
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Add the cmake folder to locate the FindSphinx module
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
-
 # Set the c++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
+
+#================================================================================================= FIND DEPENDENCIES ===
+# Add the cmake folder to locate the FindSphinx module
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 #=============================================================================================== ADD PROJECT TARGETS ===
 # MUST COME AFTER DEPENDENCY LOCATING
 # Add project source directories
 include_directories("${CPP_SRC_PATH}")
 add_subdirectory("${CPP_SRC_PATH}")
+add_subdirectory(${PYTHON_SRC_PATH})
 
 # Only add tests and documentation for current project builds. Protects downstream project builds.
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -42,14 +45,17 @@ write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
                                  VERSION ${PROJECT_VERSION}
                                  COMPATIBILITY SameMajorVersion)
 configure_package_config_file(
-  "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}/${PROJECT_NAME}Config.cmake.in"
+  "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}/Config.cmake.in"
   "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
   INSTALL_DESTINATION
   ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
 
-install(EXPORT ${PROJECT_NAME}_Targets
-        FILE ${PROJECT_NAME}Targets.cmake
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+# CMake won't build the targets for local builds of upstream projects
+if(cmake_build_type_lower STREQUAL release)
+    install(EXPORT ${PROJECT_NAME}_Targets
+            FILE ${PROJECT_NAME}Targets.cmake
+            DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+endif()
 
 install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
               "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
