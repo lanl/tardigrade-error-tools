@@ -5,7 +5,3 @@ workdir=${PWD}
 # Perform repo tests
 cd "build"
 ctest --verbose --output-log results.tex
-#=============================================================== RUN PYTESTS ===
-cd ${workdir}
-./pytest.sh
-cd ${workdir}
