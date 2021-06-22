@@ -10,6 +10,11 @@ Changelog
 0.2.1 (unreleased)
 ******************
 
+Bug fixes
+=========
+- Add CMake build type to CI/CD build scripts to correctly install the protected ``<project>Targets.cmake`` file. By
+  `Kyle Brindley`_.
+
 
 ******************
 0.2.0 (2021-05-28)
