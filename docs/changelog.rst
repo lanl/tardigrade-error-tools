@@ -13,7 +13,7 @@ Changelog
 Bug fixes
 =========
 - Add CMake build type to CI/CD build scripts to correctly install the protected ``<project>Targets.cmake`` file
-  (:pull:`35`). By `Kyle Brindley`_.
+  (:pull:`35` :pull:`36`). By `Kyle Brindley`_.
 
 
 ******************
