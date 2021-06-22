@@ -23,6 +23,9 @@ set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
 # Add the cmake folder to locate the FindSphinx module
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
+# Set build type checks
+string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
+
 #=============================================================================================== ADD PROJECT TARGETS ===
 # MUST COME AFTER DEPENDENCY LOCATING
 # Add project source directories
