@@ -16,6 +16,7 @@ if(GIT_EXECUTABLE)
     set(GIT_FOUND True)
 endif()
 set(VERSION_UPDATE_FROM_GIT True)
+# FIXME: Figure out why include() doesn't pick up CMAKE_MODULE_PATH correctly
 include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)
 project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION})
 
