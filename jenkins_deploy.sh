@@ -57,23 +57,10 @@ if ${master}; then
         echo "Could not find cmake executable"
         exit 3
     fi
-    # Run a fresh configuration to get VERSION file from GetVersionFromGit.cmake
-    rm -rf build
-    mkdir build
-    cd build
-    ${cmake_exec} .. -DCMAKE_BUILD_TYPE=${cmake_build_type}
-    cd ..
+    # Build VERSION file from GetVersionFromGit.cmake without a full CMake configuration
+    ${cmake_exec} -D PROJECT_NAME=error_tools -D VERSION_UPDATE_FROM_GIT=True -P src/cmake/GetVersionFromGitTag.cmake
     # GetVersionFromGit.cmake bumps micro/patch version. Retrieve next release from VERSION
     production_version=$(cut -f 1 -d '*' VERSION)
-    # First capture group is the major.minor.micro numbers
-    # Second capture group is everything following micro
-    version_regex='\([0-9]\+\.[0-9]\+\.[0-9]\+\)\(.*\)'
-    # Catch unexpected production version regex and exit with error if suffix is found
-    suffix=$(echo ${production_version} | sed "s/${version_regex}/\2/g")
-    if [ -n "${suffix}" ]; then
-        echo "Could not resolve the production version from ${old_version}. Left with ${production_version} and ${suffix}."
-        exit 4
-    fi
     developer_version=${production_version}+dev
     # Tag production commit and previous developer commit. Continue if already tagged.
     git tag -a ${production_version} -m "production release ${production_version}" || true
