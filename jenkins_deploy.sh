@@ -61,7 +61,7 @@ if ${master}; then
     rm -rf build
     mkdir build
     cd build
-    ${cmake_exec} ..
+    ${cmake_exec} .. -DCMAKE_BUILD_TYPE=${cmake_build_type}
     cd ..
     # GetVersionFromGit.cmake bumps micro/patch version. Retrieve next release from VERSION
     production_version=$(cut -f 1 -d '*' VERSION)
