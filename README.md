@@ -31,7 +31,7 @@ following commands.
 
 ## Building the documentation
 
-> **API Health Note**: The sphinx API docs are a work-in-progress. The doxygen
+> **API Health Note**: The Sphinx API docs are a work-in-progress. The doxygen
 > API is much more useful
 
 A build script has been created for convenience, ``new_build.sh``. It will build
@@ -57,13 +57,13 @@ testing.
 
        $ cmake3 --build docs
 
-5) Documentation builds to:
+5) Sphinx HTML Documentation builds to:
 
-       error_tools/build/docs/sphinx/index.html
+       error_tools/build/docs/sphinx/html/index.html
 
 6) Display docs
 
-       $ firefox docs/sphinx/index.html &
+       $ firefox docs/sphinx/html/index.html &
 
 7) While the Sphinx API is still a WIP, try the doxygen API
 
@@ -118,7 +118,7 @@ python.
 
 1) Build the libraries
 
-       $ ./new_build.sh
+       $ ./new_build.sh None
 
 2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 

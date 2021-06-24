@@ -12,6 +12,25 @@ Changelog
 
 
 ******************
+0.2.1 (2021-06-24)
+******************
+
+New Features
+============
+- Auto bump micro/patch version for production release from master branch (:pull:`45` :jira:`695`). By `Kyle Brindley`_.
+
+Bug fixes
+=========
+- Add CMake build type to CI/CD build scripts to correctly install the protected ``<project>Targets.cmake`` file
+  (:pull:`35` :pull:`36`). By `Kyle Brindley`_.
+
+Internal Changes
+================
+- Build version number from Git tags following the default ``setuptools_scm`` string style and using the predictive
+  micro/patch update behavior for development versions (:pull:`44` :jira:`694`). By `Kyle Brindley`_.
+
+
+******************
 0.2.0 (2021-05-28)
 ******************
 
