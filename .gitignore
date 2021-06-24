@@ -11,8 +11,6 @@ VERSION
 
 # Documentation and c++ build artifacts
 build*/
-# Configured by CMake during documentation build
-docs/conf.py
 
 # Python related files
 __pycache__
