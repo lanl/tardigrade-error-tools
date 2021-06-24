@@ -1,3 +1,8 @@
+# Changes from original source: Kyle Brindley
+# 1. Add micro/patch bump for nonzero commits since most recent Git tag
+# 2. Mimic setuptools_scm default string formatting with VERSION_STRING_FULL
+
+
 # Source: https://github.com/fakenmc/cmake-git-semver
 #
 # This cmake module sets the project version and partial version
@@ -14,13 +19,14 @@
 #
 # Once done, this module will define the following variables:
 #
-# ${PROJECT_NAME}_VERSION_STRING - Version string without metadata
-# such as "v2.0.0" or "v1.2.41-beta.1". This should correspond to the
-# most recent git tag.
+# ${PROJECT_NAME}_RECENT_GIT_TAG - Git version string without metadata
+#     such as "v2.0.0" or "v1.2.41-beta.1". This should correspond to the
+#     most recent git tag.
 # ${PROJECT_NAME}_VERSION_STRING_FULL - Version string with metadata
-# such as "v2.0.0+3.a23fbc" or "v1.3.1-alpha.2+4.9c4fd1"
-# ${PROJECT_NAME}_VERSION - CMake compatible version of ${PROJECT_NAME}_VERSION_STRING,
-# e.g. "[0-9].[0-9].[0-9]<.[0-9]>"
+#     such as "2.0.0.dev3+a23fbc" or "1.3.1-alpha+9c4fd1".
+#     Includes a micro/patch bump for nonzero GIT_VERSION_AHEAD
+# ${PROJECT_NAME}_VERSION - CMake compatible version of ${PROJECT_NAME}_RECENT_GIT_TAG,
+#     e.g. "[0-9].[0-9].[0-9](.[0-9])"
 # ${PROJECT_NAME}_VERSION_MAJOR - Major version integer (e.g. 2 in v2.3.1-RC.2+21.ef12c8)
 # ${PROJECT_NAME}_VERSION_MINOR - Minor version integer (e.g. 3 in v2.3.1-RC.2+21.ef12c8)
 # ${PROJECT_NAME}_VERSION_PATCH - Patch version integer (e.g. 1 in v2.3.1-RC.2+21.ef12c8)
@@ -38,11 +44,11 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 	# Get last tag from git
 	execute_process(COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		OUTPUT_VARIABLE ${PROJECT_NAME}_VERSION_STRING
+		OUTPUT_VARIABLE ${PROJECT_NAME}_RECENT_GIT_TAG
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 	#How many commits since last tag
-	execute_process(COMMAND ${GIT_EXECUTABLE} rev-list ${${PROJECT_NAME}_VERSION_STRING}..HEAD --count
+	execute_process(COMMAND ${GIT_EXECUTABLE} rev-list ${${PROJECT_NAME}_RECENT_GIT_TAG}..HEAD --count
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		OUTPUT_VARIABLE ${PROJECT_NAME}_VERSION_AHEAD
 		OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -55,7 +61,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 
 	# Get partial versions into a list
 	string(REGEX MATCHALL "-.*$|[0-9]+" ${PROJECT_NAME}_PARTIAL_VERSION_LIST
-		${${PROJECT_NAME}_VERSION_STRING})
+		${${PROJECT_NAME}_RECENT_GIT_TAG})
 
 	# Set the version numbers
 	list(GET ${PROJECT_NAME}_PARTIAL_VERSION_LIST
@@ -109,7 +115,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 	# Save version to file (which will be used when Git is not available
 	# or VERSION_UPDATE_FROM_GIT is disabled)
 	file(WRITE ${CMAKE_SOURCE_DIR}/VERSION ${${PROJECT_NAME}_VERSION_STRING_FULL}
-		"*" ${${PROJECT_NAME}_VERSION_STRING}
+		"*" ${${PROJECT_NAME}_RECENT_GIT_TAG}
 		"*" ${${PROJECT_NAME}_VERSION_MAJOR}
 		"*" ${${PROJECT_NAME}_VERSION_MINOR}
 		"*" ${${PROJECT_NAME}_VERSION_PATCH}
@@ -124,7 +130,7 @@ else()
 	string(REPLACE "*" ";" ${PROJECT_NAME}_VERSION_LIST ${${PROJECT_NAME}_VERSION_LIST})
 	# Set partial versions
 	list(GET ${PROJECT_NAME}_VERSION_LIST 0 ${PROJECT_NAME}_VERSION_STRING_FULL)
-	list(GET ${PROJECT_NAME}_VERSION_LIST 1 ${PROJECT_NAME}_VERSION_STRING)
+	list(GET ${PROJECT_NAME}_VERSION_LIST 1 ${PROJECT_NAME}_RECENT_GIT_TAG)
 	list(GET ${PROJECT_NAME}_VERSION_LIST 2 ${PROJECT_NAME}_VERSION_MAJOR)
 	list(GET ${PROJECT_NAME}_VERSION_LIST 3 ${PROJECT_NAME}_VERSION_MINOR)
 	list(GET ${PROJECT_NAME}_VERSION_LIST 4 ${PROJECT_NAME}_VERSION_PATCH)
@@ -138,5 +144,5 @@ endif()
 # Set project version (without the preceding 'v')
 set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 if (${PROJECT_NAME}_VERSION_TWEAK)
-	set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION}-${${PROJECT_NAME}_VERSION_TWEAK})
+	set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION}.${${PROJECT_NAME}_VERSION_TWEAK})
 endif()
