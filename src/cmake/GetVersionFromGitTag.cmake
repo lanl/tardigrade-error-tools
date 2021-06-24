@@ -72,6 +72,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 		2 ${PROJECT_NAME}_VERSION_PATCH)
 
 	# The tweak part is optional, so check if the list contains it
+    # FIXME: tweak numbers don't work. This  project doesn't use tweak numbers.
 	list(LENGTH ${PROJECT_NAME}_PARTIAL_VERSION_LIST
 		${PROJECT_NAME}_PARTIAL_VERSION_LIST_LEN)
 	if (${PROJECT_NAME}_PARTIAL_VERSION_LIST_LEN GREATER 3)
