@@ -1,13 +1,26 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
 project(error_tools)
-enable_testing()
-project(${PROJECT_NAME} VERSION 0.2.0)
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
 set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
+
+# Add the cmake folder to locate project CMake module(s)
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
+
+# Get version number from Git
+find_program(GIT_EXECUTABLE git)
+if(GIT_EXECUTABLE)
+    set(GIT_FOUND True)
+endif()
+set(VERSION_UPDATE_FROM_GIT True)
+include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)
+
+project(${PROJECT_NAME} VERSION
+    ${${PROJECT_NAME}_VERSION}
+    )
 
 # Add installation directory variables
 include(GNUInstallDirs)
@@ -20,9 +33,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
 
+# Enable CTest
+enable_testing()
+
 #================================================================================================= FIND DEPENDENCIES ===
-# Add the cmake folder to locate project CMake module(s)
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 # Set build type checks
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
