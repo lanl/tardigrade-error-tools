@@ -1,12 +1,24 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
-project(error_tools VERSION 0.2.0)
-enable_testing()
+project(error_tools)
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
 set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
+
+# Add the cmake folder to locate project CMake module(s)
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
+
+# Get version number from Git
+find_program(GIT_EXECUTABLE git)
+if(GIT_EXECUTABLE)
+    set(GIT_FOUND True)
+endif()
+set(VERSION_UPDATE_FROM_GIT True)
+# FIXME: Figure out why include() doesn't pick up CMAKE_MODULE_PATH correctly
+include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)
+project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION})
 
 # Add installation directory variables
 include(GNUInstallDirs)
@@ -19,10 +31,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
 
-#================================================================================================= FIND DEPENDENCIES ===
-# Add the cmake folder to locate the FindSphinx module
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
+# Enable CTest
+enable_testing()
 
+#================================================================================================= FIND DEPENDENCIES ===
 # Set build type checks
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 
