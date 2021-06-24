@@ -73,12 +73,38 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 		string(SUBSTRING ${${PROJECT_NAME}_VERSION_TWEAK} 1 -1 ${PROJECT_NAME}_VERSION_TWEAK)
 	endif()
 
+    # Bump the patch/micro version when tag doesn't describe current commit
+    # Anticipates the current commit as part of the next release
+    if(NOT ${PROJECT_NAME}_VERSION_AHEAD STREQUAL  "0")
+        math(EXPR ${PROJECT_NAME}_VERSION_PATCH "${${PROJECT_NAME}_VERSION_PATCH} + 1")
+        set(${PROJECT_NAME}_VERSION_TWEAK "")
+    endif()
+
 	# Unset the list
 	unset(${PROJECT_NAME}_PARTIAL_VERSION_LIST)
 
-	# Set full project version string
-	set(${PROJECT_NAME}_VERSION_STRING_FULL
-		${${PROJECT_NAME}_VERSION_STRING}${${PROJECT_NAME}_VERSION_AHEAD}+${${PROJECT_NAME}_VERSION_GIT_SHA})
+	# Set full project version string. Tweak as optional.
+    # Git tag matches commit:
+    #     <major>.<minor>.<patch>(.<tweak>)+<commit short hash>, e.g. 3.2.1(.123)+a1s2d3f
+    # Git tag before commit:
+    #     <major>.<minor>.<patch>(.<tweak>).dev<commit count>+<commit short hash>, e.g. 3.2.1.dev99+a1s2d3f
+	string(CONCAT ${PROJECT_NAME}_VERSION_STRING_FULL
+           "${${PROJECT_NAME}_VERSION_MAJOR}"
+           ".${${PROJECT_NAME}_VERSION_MINOR}"
+           ".${${PROJECT_NAME}_VERSION_PATCH}")
+    if(${PROJECT_NAME}_VERSION_TWEAK)
+    	string(CONCAT ${PROJECT_NAME}_VERSION_STRING_FULL
+               "${${PROJECT_NAME}_VERSION_STRING_FULL}"
+               ".${${PROJECT_NAME}_VERSION_TWEAK}")
+    endif()
+    if(NOT ${PROJECT_NAME}_VERSION_AHEAD STREQUAL  "0")
+	    string(CONCAT ${PROJECT_NAME}_VERSION_STRING_FULL
+               "${${PROJECT_NAME}_VERSION_STRING_FULL}"
+               ".dev${${PROJECT_NAME}_VERSION_AHEAD}")
+    endif()
+	string(CONCAT ${PROJECT_NAME}_VERSION_STRING_FULL
+           "${${PROJECT_NAME}_VERSION_STRING_FULL}"
+           "+${${PROJECT_NAME}_VERSION_GIT_SHA}")
 
 	# Save version to file (which will be used when Git is not available
 	# or VERSION_UPDATE_FROM_GIT is disabled)
