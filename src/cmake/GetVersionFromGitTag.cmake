@@ -38,7 +38,7 @@
 #
 # Author: Nuno Fachada
 
-# Find git
+# Find Git
 find_program(GIT_EXECUTABLE git)
 if(GIT_EXECUTABLE)
     set(GIT_FOUND True)
