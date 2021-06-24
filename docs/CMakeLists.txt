@@ -12,7 +12,7 @@ set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/${CPP_SRC_PATH})
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/doxygen)
 set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/xml/index.xml)
 set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
-set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/doxygen/Doxyfile)
 
 # Replace variables inside @@ with the current values
 configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
@@ -25,7 +25,7 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                        ${PROJECT_SOURCE_FILES}
                    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
                    MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
-                   COMMENT "Generating ${PROJECT_NAME} docs"
+                   COMMENT "Generating ${PROJECT_NAME} Doxygen API"
                    VERBATIM)
 
 # Add doxygen target
@@ -33,11 +33,10 @@ add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
 #=================================================================== SPHINX ===
 # Set sphinx variables
-set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
 set(SPHINX_INDEX_FILE ${SPHINX_BUILD}/index.html)
 set(SPHINX_IN ${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in)
-set(SPHINX_OUT ${CMAKE_CURRENT_SOURCE_DIR}/conf.py)
+set(SPHINX_OUT ${CMAKE_CURRENT_BINARY_DIR}/sphinx/conf.py)
 
 # Replace variables inside @@ with the current values
 configure_file(${SPHINX_IN} ${SPHINX_OUT} @ONLY)
@@ -53,17 +52,21 @@ set(DOCUMENTATION_SOURCE
 # Add sphinx command
 add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                    COMMAND
-                       ${SPHINX_EXECUTABLE} -b html
+                       ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_CURRENT_SOURCE_DIRECTORY}/${DOCUMENTATION_SOURCE}
+                           ${SPHINX_BUILD}
+                   COMMAND
+                       ${SPHINX_EXECUTABLE} -M html
+                       ${SPHINX_BUILD} ${SPHINX_BUILD}
                        # Tell Breathe where to find the Doxygen output
                        -Dbreathe_projects.${PROJECT_NAME}=${DOXYGEN_OUTPUT_DIR}/xml
-                       ${SPHINX_SOURCE} ${SPHINX_BUILD}
                    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                    DEPENDS
                        ${DOXYGEN_INDEX_FILE}
                        # Other docs files you want to track should go here (or in some variable)
                        ${DOCUMENTATION_SOURCE}
                    MAIN_DEPENDENCY ${SPHINX_IN} ${SPHINX_OUT}
-                   COMMENT "Generating ${PROJECT_NAME} documentation with Sphinx")
+                   COMMENT "Generating ${PROJECT_NAME} Sphinx documentation")
 
 # Add sphinx target
 add_custom_target(Sphinx ALL DEPENDS Doxygen ${SPHINX_INDEX_FILE})
