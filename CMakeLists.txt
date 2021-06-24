@@ -11,10 +11,6 @@ set(CMAKE_SRC_PATH "src/cmake")
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 # Get version number from Git
-find_program(GIT_EXECUTABLE git)
-if(GIT_EXECUTABLE)
-    set(GIT_FOUND True)
-endif()
 set(VERSION_UPDATE_FROM_GIT True)
 # FIXME: Figure out why include() doesn't pick up CMAKE_MODULE_PATH correctly
 include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)

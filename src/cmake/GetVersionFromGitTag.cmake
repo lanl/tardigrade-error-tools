@@ -38,8 +38,14 @@
 #
 # Author: Nuno Fachada
 
+# Find git
+find_program(GIT_EXECUTABLE git)
+if(GIT_EXECUTABLE)
+    set(GIT_FOUND True)
+endif()
+
 # Check if git is found...
-if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
+if(GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 
 	# Get last tag from git
 	execute_process(COMMAND ${GIT_EXECUTABLE} describe --abbrev=0 --tags
@@ -75,7 +81,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
     # FIXME: tweak numbers don't work. This  project doesn't use tweak numbers.
 	list(LENGTH ${PROJECT_NAME}_PARTIAL_VERSION_LIST
 		${PROJECT_NAME}_PARTIAL_VERSION_LIST_LEN)
-	if (${PROJECT_NAME}_PARTIAL_VERSION_LIST_LEN GREATER 3)
+	if(${PROJECT_NAME}_PARTIAL_VERSION_LIST_LEN GREATER 3)
 		list(GET ${PROJECT_NAME}_PARTIAL_VERSION_LIST 3 ${PROJECT_NAME}_VERSION_TWEAK)
 		string(SUBSTRING ${${PROJECT_NAME}_VERSION_TWEAK} 1 -1 ${PROJECT_NAME}_VERSION_TWEAK)
 	endif()
@@ -91,12 +97,12 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 	unset(${PROJECT_NAME}_PARTIAL_VERSION_LIST)
 
     # Set project release version, e.g. numbers only version for CMake
-    string(CONCAT ${PROJECT_NAME}_VERSION 
+    string(CONCAT ${PROJECT_NAME}_VERSION
            "${${PROJECT_NAME}_VERSION_MAJOR}"
            ".${${PROJECT_NAME}_VERSION_MINOR}"
            ".${${PROJECT_NAME}_VERSION_PATCH}")
-    if (${PROJECT_NAME}_VERSION_TWEAK)
-    	string(CONCAT ${PROJECT_NAME}_VERSION 
+    if(${PROJECT_NAME}_VERSION_TWEAK)
+    	string(CONCAT ${PROJECT_NAME}_VERSION
                "${${PROJECT_NAME}_VERSION}"
                ".${${PROJECT_NAME}_VERSION_TWEAK}")
     endif()
@@ -119,7 +125,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 
 	# Save version to file (which will be used when Git is not available
 	# or VERSION_UPDATE_FROM_GIT is disabled)
-	file(WRITE ${CMAKE_SOURCE_DIR}/VERSION 
+	file(WRITE ${CMAKE_SOURCE_DIR}/VERSION
              ${${PROJECT_NAME}_VERSION}
          "*" ${${PROJECT_NAME}_VERSION_STRING_FULL}
 		 "*" ${${PROJECT_NAME}_RECENT_GIT_TAG}
