@@ -6,6 +6,7 @@ set(PROJECT_PUBLIC_HEADER_DIR ${PROJECT_SOURCE_DIR}/${CPP_SRC_PATH})
 file(GLOB_RECURSE PROJECT_PUBLIC_HEADERS ${PROJECT_PUBLIC_HEADER_DIR}/*.h)
 file(GLOB_RECURSE PROJECT_SOURCE_FILES ${PROJECT_PUBLIC_HEADER_DIR}/*.cpp)
 
+#=================================================================== DOXYGEN ===
 # Set doxygen variables
 set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/${CPP_SRC_PATH})
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/doxygen)
@@ -28,15 +29,18 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                    VERBATIM)
 
 # Add doxygen target
-add_custom_target(Doxygen ALL
-                  DEPENDS
-                      ${DOXYGEN_INDEX_FILE}
-                 )
+add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
+#=================================================================== SPHINX ===
 # Set sphinx variables
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR})
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
 set(SPHINX_INDEX_FILE ${SPHINX_BUILD}/index.html)
+set(SPHINX_IN ${CMAKE_CURRENT_SOURCE_DIR}/conf.py.in)
+set(SPHINX_OUT ${CMAKE_CURRENT_SOURCE_DIR}/conf.py)
+
+# Replace variables inside @@ with the current values
+configure_file(${SPHINX_IN} ${SPHINX_OUT} @ONLY)
 
 # Explicit list of documentation source files because globbing won't trigger CMake config on re-builds
 set(DOCUMENTATION_SOURCE
@@ -58,11 +62,8 @@ add_custom_command(OUTPUT ${SPHINX_INDEX_FILE}
                        ${DOXYGEN_INDEX_FILE}
                        # Other docs files you want to track should go here (or in some variable)
                        ${DOCUMENTATION_SOURCE}
-                   MAIN_DEPENDENCY ${SPHINX_SOURCE}/conf.py
+                   MAIN_DEPENDENCY ${SPHINX_IN} ${SPHINX_OUT}
                    COMMENT "Generating ${PROJECT_NAME} documentation with Sphinx")
 
 # Add sphinx target
-add_custom_target(Sphinx ALL
-                  DEPENDS
-                      Doxygen
-                      ${SPHINX_INDEX_FILE})
+add_custom_target(Sphinx ALL DEPENDS Doxygen ${SPHINX_INDEX_FILE})
