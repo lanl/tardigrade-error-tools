@@ -10,6 +10,11 @@ Changelog
 0.2.1 (unreleased)
 ******************
 
+
+******************
+0.2.1 (2021-06-24)
+******************
+
 New Features
 ============
 - Auto bump micro/patch version for production release from master branch (:pull:`45` :jira:`695`). By `Kyle Brindley`_.
