@@ -12,7 +12,6 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 import os
-import re
 
 # -- Project information -----------------------------------------------------
 # Meta data from CMake configure()
