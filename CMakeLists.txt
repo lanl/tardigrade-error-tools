@@ -1,7 +1,8 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
-project(error_tools VERSION 0.2.0)
+project(error_tools)
 enable_testing()
+project(${PROJECT_NAME} VERSION 0.2.0)
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
@@ -20,7 +21,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
 
 #================================================================================================= FIND DEPENDENCIES ===
-# Add the cmake folder to locate the FindSphinx module
+# Add the cmake folder to locate project CMake module(s)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
 # Set build type checks
