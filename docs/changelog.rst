@@ -10,6 +10,10 @@ Changelog
 0.2.1 (unreleased)
 ******************
 
+New Features
+============
+- Auto bump micro/patch version for production release from master branch (:pull:`45` :jira:`695`). By `Kyle Brindley`_.
+
 Bug fixes
 =========
 - Add CMake build type to CI/CD build scripts to correctly install the protected ``<project>Targets.cmake`` file
