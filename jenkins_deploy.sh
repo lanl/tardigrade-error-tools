@@ -48,11 +48,20 @@ set -Eeuxo pipefail
 
 # For master branch, update tags before building documentation and whl
 if ${master}; then
+    # Find cmake3 executable
+    if [ -x "$(command -v cmake3)" ]; then
+        cmake_exec=$(command -v cmake3)
+    elif [ -x "$(command -v cmake)" ]; then
+        cmake_exec=$(command -v cmake)
+    else
+        echo "Could not find cmake executable"
+        exit 3
+    fi
     # Run a fresh configuration to get VERSION file from GetVersionFromGit.cmake
     rm -rf build
     mkdir build
     cd build
-    cmake ..
+    ${cmake_exec} ..
     cd ..
     # GetVersionFromGit.cmake bumps micro/patch version. Retrieve next release from VERSION
     production_version=$(cut -f 1 -d '*' VERSION)
@@ -63,7 +72,7 @@ if ${master}; then
     suffix=$(echo ${production_version} | sed "s/${version_regex}/\2/g")
     if [ -n "${suffix}" ]; then
         echo "Could not resolve the production version from ${old_version}. Left with ${production_version} and ${suffix}."
-        exit 3
+        exit 4
     fi
     developer_version=${production_version}+dev
     # Tag production commit and previous developer commit. Continue if already tagged.
