@@ -17,10 +17,7 @@ if(GIT_EXECUTABLE)
 endif()
 set(VERSION_UPDATE_FROM_GIT True)
 include(${CMAKE_SRC_PATH}/GetVersionFromGitTag.cmake)
-
-project(${PROJECT_NAME} VERSION
-    ${${PROJECT_NAME}_VERSION}
-    )
+project(${PROJECT_NAME} VERSION ${${PROJECT_NAME}_VERSION})
 
 # Add installation directory variables
 include(GNUInstallDirs)
@@ -37,7 +34,6 @@ set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
 enable_testing()
 
 #================================================================================================= FIND DEPENDENCIES ===
-
 # Set build type checks
 string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 
