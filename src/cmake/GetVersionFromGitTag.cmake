@@ -78,7 +78,7 @@ if (GIT_FOUND AND VERSION_UPDATE_FROM_GIT)
 
 	# Set full project version string
 	set(${PROJECT_NAME}_VERSION_STRING_FULL
-		${${PROJECT_NAME}_VERSION_STRING}+${${PROJECT_NAME}_VERSION_AHEAD}.${${PROJECT_NAME}_VERSION_GIT_SHA})
+		${${PROJECT_NAME}_VERSION_STRING}${${PROJECT_NAME}_VERSION_AHEAD}+${${PROJECT_NAME}_VERSION_GIT_SHA})
 
 	# Save version to file (which will be used when Git is not available
 	# or VERSION_UPDATE_FROM_GIT is disabled)
