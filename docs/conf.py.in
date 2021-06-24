@@ -30,12 +30,12 @@ VERSION_GIT_SHA = '@error_tools_VERSION_GIT_SHA@'
 copyright = '2020, Nathan A. Miller and Kyle A. Brindley'
 author = 'Nathan A. Miller and Kyle A. Brindley'
 
-# Scrape meta_file for version or fall back to git info
+# Set version to clean Git tag or else use meta data in version
 release = VERSION
-if release != VERSION_STRING_FULL:
-    version = VERSION_STRING_FULL
+if int(VERSION_AHEAD) == 0:  # Git tag describes current commit
+    version = release
 else:
-    version = release 
+    version = VERSION_STRING_FULL
 
 # -- Project Variables -------------------------------------------------------
 rst_prolog = f'.. |project| replace:: {project}\n.. include:: targets.txt'
