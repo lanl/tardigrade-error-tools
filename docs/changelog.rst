@@ -10,6 +10,10 @@ Changelog
 0.2.1 (unreleased)
 ******************
 
+Internal Changes
+================
+- Update minimal Conda environment file (:pull:`48` :jira:`714`). By `Kyle Brindley`_.
+
 
 ******************
 0.2.1 (2021-06-24)
