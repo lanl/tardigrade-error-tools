@@ -1,7 +1,6 @@
 # Test dev branch against beta environment. All other branches against release
 environment='release'
 env_alias='sv3r'
-master=false
 if [[ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]] || [[ ${CI_COMMIT_BRANCH} == dev ]]; then
     environment='beta'
     env_alias='sv3b'
@@ -9,7 +8,6 @@ if [[ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]] || [[ ${CI_COMMIT_BRANCH}
 elif [[ ${CI_COMMIT_BRANCH} == master ]]; then
     environment='release'
     env_alias='sv3r'
-    master=true
 fi
 
 # Activate W-13 Python environment

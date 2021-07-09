@@ -12,7 +12,7 @@ echo "Running ${script}"
 set -Eeuxo pipefail
 
 # For master branch, update tags before building documentation and whl
-if ${master}; then
+if [[ ${CI_COMMIT_BRANCH} == master ]]; then
     # Find cmake3 executable
     if [ -x "$(command -v cmake3)" ]; then
         cmake_exec=$(command -v cmake3)
@@ -20,7 +20,7 @@ if ${master}; then
         cmake_exec=$(command -v cmake)
     else
         echo "Could not find cmake executable"
-        exit 3
+        exit 1
     fi
     # Build VERSION file from GetVersionFromGit.cmake without a full CMake configuration
     ${cmake_exec} -D PROJECT_NAME=error_tools -D VERSION_UPDATE_FROM_GIT=True -P src/cmake/GetVersionFromGitTag.cmake
@@ -28,10 +28,14 @@ if ${master}; then
     production_version=$(cut -f 1 -d '*' VERSION)
     developer_version=${production_version}+dev
     # Tag production commit and previous developer commit. Continue if already tagged.
-    git tag -a ${production_version} -m "production release ${production_version}" || true
-    last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)  # Assume last merge was dev->master. Pick previous
-    git tag -a ${developer_version} -m "developer release ${developer_version}" ${last_merge_hash} || true
-    git push origin --tags
+    # FIXME: fix the toolbox-jenkins push permissions to get auto tag updates to work in Gitlab
+    #git tag -a ${production_version} -m "production release ${production_version}" || true
+    #last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)  # Assume last merge was dev->master. Pick previous
+    #git tag -a ${developer_version} -m "developer release ${developer_version}" ${last_merge_hash} || true
+    #git push origin --tags
+elif [[ ! ${CI_COMMIT_BRANCH} == dev ]]; then
+    echo "Only production branches, master and dev, are deployable"
+    exit 2
 fi
 
 # Build project
