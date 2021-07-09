@@ -33,6 +33,7 @@ pages:
   variables:
     GIT_STRATEGY: clone
   script: 
+    - source activate_w13pythonenv.sh sv3r release 
     - ./BUILD.sh
     - mkdir public
     - cp -r build/docs/sphinx/html/* public/

@@ -11,7 +11,7 @@ if [ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]; then
 fi
 
 # Activate W-13 Python environment
-./activate_w13pythonenv ${env_alias} ${environment}
+source ./activate_w13pythonenv.sh ${env_alias} ${environment}
 
 # Make bash script more like high-level languages.
 set -Eeuxo pipefail

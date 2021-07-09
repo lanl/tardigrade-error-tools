@@ -23,7 +23,7 @@ else
 fi
 
 # Activate W-13 Python environment
-./activate_w13pythonenv ${env_alias} ${environment}
+source ./activate_w13pythonenv.sh ${env_alias} ${environment}
 
 # Can treat bash like a scripting language after conda activation
 set -Eeuxo pipefail
