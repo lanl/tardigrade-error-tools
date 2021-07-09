@@ -8,7 +8,7 @@ test_build:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   variables:
     GIT_STRATEGY: clone
-  script: ./TEST.sh 
+  script: ./CI.sh 
   artifacts:
     when: always
     paths:
@@ -20,7 +20,7 @@ deploy_build:
   stage: deploy
   variables:
     GIT_STRATEGY: clone
-  script: ./DEPLOY.sh
+  script: ./CD.sh
   tags:
     - sstelmo-shell-aea 
   only:
