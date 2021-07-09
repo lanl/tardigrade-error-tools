@@ -6,7 +6,7 @@ if [[ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]] || [[ ${CI_COMMIT_BRANCH}
     environment='beta'
     env_alias='sv3b'
 # Deploy master branch against release environment. All other branches against beta.
-elif [ ${CI_COMMIT_BRANCH} == master ]; then
+elif [[ ${CI_COMMIT_BRANCH} == master ]]; then
     environment='release'
     env_alias='sv3r'
     master=true
