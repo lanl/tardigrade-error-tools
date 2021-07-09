@@ -13,6 +13,9 @@ Changelog
 Internal Changes
 ================
 - Update minimal Conda environment file (:pull:`48` :jira:`714`). By `Kyle Brindley`_.
+- Migrate from ddw-bitcket.lanl.gov to re-git.lanl.gov (:issue:`1` :merge:`1`). By `Kyle Brindley`_.
+- Update changelog issue and merge request link creation Sphinx directives (:issue:`2` :merge:`3`). By `Kyle Brindley`_.
+- Use a commonly sourced environment activation script for CI/CD pipeline execution (:issue:`2` :merge:`3`). By `Kyle Brindley`_.
 
 
 ******************

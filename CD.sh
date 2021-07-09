@@ -8,38 +8,6 @@ date
 script=`basename "$0"`
 echo "Running ${script}"
 
-# Deploy master branch against release environment. All other branches against beta.
-if [ ${CI_COMMIT_BRANCH} == master ]; then
-    environment='release'
-    env_alias='sv3r'
-    master=true
-elif [ ${CI_COMMIT_BRANCH} == dev ]; then
-    environment='beta'
-    env_alias='sv3b'
-    master=false
-else
-    echo "Unexpected branch name. Exiting..."
-    exit 1
-fi
-
-# Activate W-13 Python environment
-case $(hostname) in
-    sstelmo.lanl.gov|mayhem.lanl.gov)
-        projects="/projects"
-        module load python/2020.07-python-3.8
-        ${env_alias}
-        ;;  # No fall through
-    sn-fey?.lanl.gov|sn-rfe?.lanl.gov|sn???.lanl.gov)
-        projects="/usr/projects/ea"
-        module load python/3.8-anaconda-2020.07
-        source activate /usr/projects/ea/python/${environment}
-        module load intel
-        ;;
-    *)
-        echo "Unknown or unsupported host $(hostname)."
-        exit 2
-esac
-
 # Can treat bash like a scripting language after conda activation
 set -Eeuxo pipefail
 
