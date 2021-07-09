@@ -5,7 +5,7 @@ set -x
 # Test dev branch against beta environment. All other branches against release
 environment='release'
 env_alias='sv3r'
-if [ ${targetBranch} == dev ]; then
+if [ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]; then
     environment='beta'
     env_alias='sv3b'
 fi

@@ -8,15 +8,12 @@ date
 script=`basename "$0"`
 echo "Running ${script}"
 
-# Parse branch basename from expected path-like name, e.g. origin/branch.
-branch=$(basename ${GIT_BRANCH})
-
 # Deploy master branch against release environment. All other branches against beta.
-if [ ${branch} == master ]; then
+if [ ${CI_COMMIT_BRANCH} == master ]; then
     environment='release'
     env_alias='sv3r'
     master=true
-elif [ ${branch} == dev ]; then
+elif [ ${CI_COMMIT_BRANCH} == dev ]; then
     environment='beta'
     env_alias='sv3b'
     master=false
@@ -74,5 +71,3 @@ fi
 
 # Install project into conda environment by expected whl name.
 ./INSTALL.sh
-
-# TODO: deploy documentation
