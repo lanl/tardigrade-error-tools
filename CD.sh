@@ -8,23 +8,6 @@ date
 script=`basename "$0"`
 echo "Running ${script}"
 
-# Deploy master branch against release environment. All other branches against beta.
-if [ ${CI_COMMIT_BRANCH} == master ]; then
-    environment='release'
-    env_alias='sv3r'
-    master=true
-elif [ ${CI_COMMIT_BRANCH} == dev ]; then
-    environment='beta'
-    env_alias='sv3b'
-    master=false
-else
-    echo "Unexpected branch name. Exiting..."
-    exit 1
-fi
-
-# Activate W-13 Python environment
-source ./activate_w13pythonenv.sh ${env_alias} ${environment}
-
 # Can treat bash like a scripting language after conda activation
 set -Eeuxo pipefail
 

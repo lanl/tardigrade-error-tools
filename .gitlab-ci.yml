@@ -2,6 +2,8 @@ stages:
   - test
   - deploy
 
+before_script: source activate_w13pythonenv.sh
+
 test_build:
   stage: test
   rules: 

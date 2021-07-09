@@ -1,16 +1,15 @@
-set -x
-
-# Get this scripts file name
-script=`basename "$0"`
-
-# Parse arguments
-if [ "$#" -ne 2 ]; then
-    echo "${script} USAGE:"
-    echo "./${script} env_alias environment_name"
-    echo "    env_alias: module provided activate alias, e.g. sv3{r,b,d}"
-    echo "    environment_name: corresponding environment name, e.g. release, beta, develop"
-    echo "THIS SCRIPT IS NOT INTENDED FOR DIRECT USE. IT IS USED BY THE CI/CD BASH SCRIPTS."
-    exit 1
+# Test dev branch against beta environment. All other branches against release
+environment='release'
+env_alias='sv3r'
+master=false
+if [[ ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} == dev ]] || [[ ${CI_COMMIT_BRANCH} == dev ]]; then
+    environment='beta'
+    env_alias='sv3b'
+# Deploy master branch against release environment. All other branches against beta.
+elif [ ${CI_COMMIT_BRANCH} == master ]; then
+    environment='release'
+    env_alias='sv3r'
+    master=true
 fi
 
 # Activate W-13 Python environment
@@ -28,5 +27,4 @@ case $(hostname) in
         ;;
     *)
         echo "Unknown or unsupported host $(hostname)."
-        exit 2
 esac
