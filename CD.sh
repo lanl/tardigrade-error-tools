@@ -23,22 +23,7 @@ else
 fi
 
 # Activate W-13 Python environment
-case $(hostname) in
-    sstelmo.lanl.gov|mayhem.lanl.gov)
-        projects="/projects"
-        module load python/2020.07-python-3.8
-        ${env_alias}
-        ;;  # No fall through
-    sn-fey?.lanl.gov|sn-rfe?.lanl.gov|sn???.lanl.gov)
-        projects="/usr/projects/ea"
-        module load python/3.8-anaconda-2020.07
-        source activate /usr/projects/ea/python/${environment}
-        module load intel
-        ;;
-    *)
-        echo "Unknown or unsupported host $(hostname)."
-        exit 2
-esac
+./activate_w13pythonenv ${env_alias} ${environment}
 
 # Can treat bash like a scripting language after conda activation
 set -Eeuxo pipefail
