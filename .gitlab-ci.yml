@@ -32,12 +32,10 @@ pages:
   stage: deploy
   variables:
     GIT_STRATEGY: clone
-  script:
+  script: 
+    - ./BUILD.sh
     - mkdir public
-    - cd docs
-    - make html
-    - cp -r build/html/* ../public/
-    - cd ..
+    - cp -r build/docs/sphinx/html/* public/
   artifacts:
     paths:
       # It MUST be called public
