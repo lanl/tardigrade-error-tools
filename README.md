@@ -1,8 +1,17 @@
 # error\_tools
 
+## Project Description
+
 A collection of tools used for error handling. These tools provide a linked
 list class which can help a user both understand where an error happened
 and also help the developer to correct for the errors.
+
+* Documentation: https://aea.re-pages.lanl.gov/material-models/error_tools
+* Wiki: https://re-git.lanl.gov/aea/material-models/error_tools/-/wikis/home
+* Developers
+
+  * Nathan Miller <nathanm@lanl.gov>
+  * Kyle Brindley <kbrindley@lanl.gov>
 
 ---
 
