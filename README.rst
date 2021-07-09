@@ -44,8 +44,10 @@ documentation build are included in ``environment.yaml`` and
 ``requirements.txt``. A minimal anaconda environment for building the
 documentation can be created from an existing anaconda installation with the
 following commands.
+ 
+.. code-block:: bash
 
-    $ conda env create --file environment.yaml
+   $ conda env create --file environment.yaml
 
 **************************
 Building the documentation
