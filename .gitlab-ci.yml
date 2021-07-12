@@ -27,7 +27,6 @@ test_build:
 
 deploy_build:
   stage: deploy
-  rules:
   variables:
     GIT_STRATEGY: clone
   script: ./CD.sh
