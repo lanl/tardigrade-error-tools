@@ -28,11 +28,13 @@ if [[ ${CI_COMMIT_BRANCH} == master ]]; then
     production_version=$(cut -f 1 -d '*' VERSION)
     developer_version=${production_version}+dev
     # Tag production commit and previous developer commit. Continue if already tagged.
-    # FIXME: fix the toolbox-jenkins push permissions to get auto tag updates to work in Gitlab
-    #git tag -a ${production_version} -m "production release ${production_version}" || true
-    #last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)  # Assume last merge was dev->master. Pick previous
-    #git tag -a ${developer_version} -m "developer release ${developer_version}" ${last_merge_hash} || true
-    #git push origin --tags
+    git config user.name "AEA Automation"
+    git config user.email "w13devops.lanl.gov"
+    git remote add oauth2-origin https://oauth2:${GITLAB_ACCESS_TOKEN}@gitlab.com/${CI_PROJECT_PATH}
+    git tag -a ${production_version} -m "production release ${production_version}" || true
+    last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)  # Assume last merge was dev->master. Pick previous
+    git tag -a ${developer_version} -m "developer release ${developer_version}" ${last_merge_hash} || true
+    git push oauth2-origin --tags
 elif [[ ! ${CI_COMMIT_BRANCH} == dev ]]; then
     echo "Only production branches, master and dev, are deployable"
     exit 2

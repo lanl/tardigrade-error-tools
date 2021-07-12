@@ -22,6 +22,8 @@ Internal Changes
 - Use a commonly sourced environment activation script for CI/CD pipeline execution (:issue:`2` :merge:`3`). By `Kyle Brindley`_.
 - Temporarily comment out Git tag push logic for master branch deploy until Gitlab permissions are resolved (:issue:`3`
   :merge:`4`). By `Kyle Brindley`_.
+- Update Gitlab CI/CD job to allow Git tag pushes during production version deployment (:issue:`4` :merge:`6`). By `Kyle
+  Brindley`_.
 
 
 ******************
