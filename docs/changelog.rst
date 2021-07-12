@@ -7,7 +7,12 @@ Changelog
 
 
 ******************
-0.2.1 (unreleased)
+0.2.3 (unreleased)
+******************
+
+
+******************
+0.2.2 (2021-07-12)
 ******************
 
 Bug fixes
@@ -22,8 +27,8 @@ Internal Changes
 - Use a commonly sourced environment activation script for CI/CD pipeline execution (:issue:`2` :merge:`3`). By `Kyle Brindley`_.
 - Temporarily comment out Git tag push logic for master branch deploy until Gitlab permissions are resolved (:issue:`3`
   :merge:`4`). By `Kyle Brindley`_.
-- Update Gitlab CI/CD job to allow Git tag pushes during production version deployment (:issue:`4` :merge:`6` :merge:`8`). By `Kyle
-  Brindley`_.
+- Update Gitlab CI/CD job to allow Git tag pushes during production version deployment (:issue:`4` :merge:`6` :merge:`8`
+  :merge:`10` :merge:`12`). By `Kyle Brindley`_.
 
 
 ******************
