@@ -30,7 +30,7 @@ if [[ ${CI_COMMIT_BRANCH} == master ]]; then
     # Tag production commit and previous developer commit. Continue if already tagged.
     git config user.name "AEA Automation"
     git config user.email "w13devops.lanl.gov"
-    git remote add oauth2-origin https://oauth2:${GITLAB_ACCESS_TOKEN}@gitlab.com/${CI_PROJECT_PATH}
+    git remote add oauth2-origin https://oauth2:${GITLAB_ACCESS_TOKEN}@re-git.lanl.gov/${CI_PROJECT_PATH}
     git tag -a ${production_version} -m "production release ${production_version}" || true
     last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)  # Assume last merge was dev->master. Pick previous
     git tag -a ${developer_version} -m "developer release ${developer_version}" ${last_merge_hash} || true
