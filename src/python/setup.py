@@ -6,33 +6,30 @@ from Cython.Distutils import build_ext
 
 import settings
 
+###########################################
+# Get the third-party include directories #
+###########################################
+include_dirs = [str(settings.CPP_SOURCE_DIRECTORY), str(settings.CONDA_ENVIRONMENT_INCLUDE)]
 
-# Search the tree for the static libraries and the include directories
-static_libraries = []
-include_dirs = [settings.CPP_SOURCE_DIRECTORY]
-
-# Search the build directory
-for root, dirs, files in os.walk(settings.CPP_BUILD_DIRECTORY):
-    for file in files:
-        if file.endswith('.a'):
-            static_libraries.append(os.path.abspath(os.path.join(root, file)))
-
-    for dir in dirs:
-        if ("cpp" in dir) and ("_deps" in dir):
-            include_dirs.append(os.path.join(root, dir))
+############################
+# Get the static libraries #
+############################
+# Find current project static library
+project_static_library = settings.BUILD_DIRECTORY / settings.CPP_SOURCE_SUBDIRECTORY / f"lib{settings.PROJECT_NAME}.a"
+static_libraries = [str(project_static_library.resolve())]
 
 # Define the build configuration
-ext_modules = [Extension("error_tools",
-                     sources=["main.pyx"],
+ext_modules = [Extension(settings.PROJECT_NAME,
+                     sources=[f"{settings.PROJECT_NAME}_python.pyx"],
                      language='c++',
                      extra_objects=static_libraries,
                      include_dirs=include_dirs,
-                     extra_compile_args=[f"-std=c++{settings.CMAKE_CXX_STANDARD}"],
-                     extra_link_args=[f"-std=c++{settings.CMAKE_CXX_STANDARD}"]
+                     extra_compile_args=[f"-std=c++{settings.CXX_STANDARD}"],
+                     extra_link_args=[f"-std=c++{settings.CXX_STANDARD}"]
                      )]
 
 setup(
-  name = 'error_tools',
+  name = settings.PROJECT_NAME,
   cmdclass = {'build_ext': build_ext},
   ext_modules = ext_modules
 )
