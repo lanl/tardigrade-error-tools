@@ -14,6 +14,8 @@ Internal Changes
 ================
 - Update the build configuration to handle conda environments than manage cpp compilers and libraries (:issue:`5`
   :merge:`18`). By `Kyle Brindley`_.
+- Add back compiler flags related to code warnings for the project wide compile options (:issue:`6`, :merge:`20`). By
+  `Kyle Brindley`_.
 
 ******************
 0.2.2 (2021-07-12)
