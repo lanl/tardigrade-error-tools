@@ -36,6 +36,10 @@ requirements:
     - gxx_linux-64 >=7.3.0
 
 test:
+  source_files:
+    - CMakeLists.txt
+    - src/cpp/tests/CMakeLists.txt
+    - src/cpp/tests/test_error_tools.cpp
   commands:
     - tree
     - mkdir build-package
