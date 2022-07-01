@@ -1,0 +1,43 @@
+package:
+  name: waves
+  # TODO: setup and use pyproject.toml and a Conda build Jinja template
+  version: 9.9.9
+
+source:
+  path: '..'
+
+build:
+  noarch: python
+  script:
+    - mkdir build-package
+    - cmake build-package
+    - cmake ..
+    - cmake --build . --target error_tools
+    - cmake --install . --prefix $PREFIX
+  ignore_run_exports:
+    - python_abi
+
+requirements:
+  build:
+    - python {{ python }}
+    - boost >=1.59
+    - cmake >=3.17
+    - eigen >=3.3.7
+    - gcc_linux-64 =7.3.0
+    - gxx_linux-64 =7.3.0
+  host:
+    - python
+  run:
+    - python >=3.8
+    - boost
+    - eigen >=3.3.7
+    - gcc_linux-64 >=7.3.0
+    - gxx_linux-64 >=7.3.0
+
+test:
+  commands:
+    - mkdir build-package
+    - cd build-package
+    - cmake ..
+    - cmake --build . --target test_error_tools
+    - ctest -R test_error_tools
