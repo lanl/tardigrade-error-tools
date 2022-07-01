@@ -1,0 +1,8 @@
+boost
+breathe
+cmake
+cython
+doxygen
+eigen>=3.3.7
+gcc_linux-64==7.3.0
+gxx_linux-64==7.3.0
