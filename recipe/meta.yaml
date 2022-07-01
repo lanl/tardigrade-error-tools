@@ -9,8 +9,9 @@ source:
 build:
   noarch: python
   script:
+    - tree
     - mkdir build-package
-    - cmake build-package
+    - cd build-package
     - cmake ..
     - cmake --build . --target error_tools
     - cmake --install . --prefix $PREFIX
@@ -36,6 +37,7 @@ requirements:
 
 test:
   commands:
+    - tree
     - mkdir build-package
     - cd build-package
     - cmake ..
