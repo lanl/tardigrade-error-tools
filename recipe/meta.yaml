@@ -24,8 +24,8 @@ requirements:
     - boost >=1.59
     - cmake >=3.17
     - eigen >=3.3.7
-    - gcc_linux-64 =7.3.0
-    - gxx_linux-64 =7.3.0
+    - gcc_linux-64 ==7.3.0
+    - gxx_linux-64 ==7.3.0
   host:
     - python
   run:
