@@ -1,7 +1,7 @@
 package:
-  name: waves
+  name: error_tools
   # TODO: setup and use pyproject.toml and a Conda build Jinja template
-  version: 9.9.9
+  version: {{ VERSION }}
 
 source:
   path: '..'

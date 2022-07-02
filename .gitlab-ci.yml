@@ -25,8 +25,7 @@ conda-build:
     - umask 0022
     - output_folder='conda-build-artifacts'
     - mkdir ${output_folder}
-    - cmake_git_version=$(cmake -D PROJECT_NAME=error_tools -D VERSION_UPDATE_FROM_GIT=True -P src/cmake/GetVersionFromGitTag.cmake)
-    - VERSION=${cmake_git_version} conda build recipe --channel conda-forge --no-anaconda-upload --croot /scratch/${USER}/conda-build --output-folder ${output_folder} --no-test
+    - VERSION=${python -m setuptools_scm} conda build recipe --channel conda-forge --no-anaconda-upload --croot /scratch/${USER}/conda-build --output-folder ${output_folder} --no-test
   artifacts:
     expire_in: '2 hrs'
     paths:
