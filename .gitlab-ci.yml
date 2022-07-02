@@ -5,6 +5,7 @@ workflow:
     - when: always
 
 stages:
+  - version
   - test
   - build
   - deploy
@@ -34,6 +35,54 @@ after_script:
   # configurations no longer require us to drop ssl verifications.
   - git config --local http.sslVerify true
 
+microbump:
+  stage: version
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    # Conditionally "bump" micro version number. setuptools_scm already bumps number, just need to strip local version.
+    - old_version=$(python -m setuptools_scm)
+    # First capture group is the major.minor.micro numbers
+    # Second capture group is everything following micro
+    - version_regex='\([0-9]\+\.[0-9]\+\.[0-9]\+\)\(.*\)'
+    # Returns clean production tag regardless if tagged already
+    - production_version=$(echo ${old_version} | sed "s/${version_regex}/\1/g")
+    # Catch unexpected production version regex and exit with error if suffix is found
+    - suffix=$(echo ${production_version} | sed "s/${version_regex}/\2/g")
+    - |
+        if [ -n "${suffix}" ]; then
+            echo "Could not resolve the production version from ${old_version}. Left with ${production_version} and ${suffix}."
+            exit 1
+        fi
+    - developer_version=${production_version}+dev
+    # Tag production commit and previous developer commit. Continue if already tagged.
+    - git config user.name "${GITLAB_USER_NAME}"
+    - git config user.email "${GITLAB_USER_EMAIL}"
+    - git remote add oauth2-origin https://gitlab-ci-token:${GITLAB_ACCESS_TOKEN}@re-git.lanl.gov/${CI_PROJECT_PATH}.git
+    - git tag -a ${production_version} -m "production release ${production_version}" || true
+    # Assume last merge was dev->main. Pick previous.
+    - last_merge_hash=$(git log --pretty=format:"%H" --merges -n 2 | tail -n 1)
+    - git tag -a ${developer_version} -m "developer pre-release ${developer_version}" ${last_merge_hash} || true
+    - git push oauth2-origin --tags
+  tags:
+    - sstelmo-shell-aea
+  only:
+    - main
+
+fast-test:
+  stage: test
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  variables:
+    GIT_STRATEGY: clone
+  script: ./CI.sh
+  artifacts:
+    when: always
+    paths:
+      - build/results.tex
+  tags:
+    - sstelmo-shell-aea
+
 conda-build:
   stage: build
   variables:
@@ -59,29 +108,26 @@ conda-build:
     - main
     - dev
 
-test_build:
-  stage: test
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  variables:
-    GIT_STRATEGY: clone
-  script: ./CI.sh
-  artifacts:
-    when: always
-    paths:
-      - build/results.tex
-  tags:
-    - sstelmo-shell-aea
-
-deploy_build:
+deploy:
   stage: deploy
   variables:
     GIT_STRATEGY: clone
-  script: ./CD.sh
+  script:
+    # Override default permissions. Set group to rx with no write permissions.
+    - umask 0022
+    # Copy Conda package to AEA Conda Channel
+    - cp conda-build-artifacts/noarch/error_tools-*-*.tar.bz2 ${aea_conda_channel}/noarch
+    # Change group for access by all W-13 staff and prevent accidental modification by institutional account in CI jobs
+    - chgrp w13users ${aea_conda_channel}/noarch/error_tools-*-*.tar.bz2 || true
+    - chmod 555 ${aea_conda_channel}/noarch/error_tools-*-*.tar.bz2 || true
+    # Update the AEA Conda Channel index
+    - conda index ${aea_conda_channel}
+    # Troubleshooting conda channel deploy and index update
+    - conda search --channel file://${aea_conda_channel}/ --override-channels error_tools
   tags:
     - sstelmo-shell-aea
   only:
-    - master
+    - main
     - dev
 
 # It MUST be called pages
