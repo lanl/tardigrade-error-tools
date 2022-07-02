@@ -6,10 +6,37 @@ workflow:
 
 stages:
   - test
+  - build
   - deploy
 
 before_script:
   - source activate_w13pythonenv.sh
+
+conda-build:
+  stage: build
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    # Set the LANL internal proxies
+    - export ALL_PROXY="proxyout.lanl.gov:8080"
+    - export HTTP_PROXY="http://$ALL_PROXY"
+    - export HTTPS_PROXY=$HTTP_PROXY
+    # Override default permissions. Set group to rx with no write permissions.
+    - umask 0022
+    - output_folder='conda-build-artifacts'
+    - mkdir ${output_folder}
+    - cmake_git_version=$(cmake -D PROJECT_NAME=error_tools -D VERSION_UPDATE_FROM_GIT=True -P src/cmake/GetVersionFromGitTag.cmake)
+    - VERSION=${cmake_git_version} conda build recipe --channel conda-forge --no-anaconda-upload --croot /scratch/${USER}/conda-build --output-folder ${output_folder}
+  artifacts:
+    expire_in: '2 hrs'
+    paths:
+      - conda-build-artifacts/noarch/error_tools-*-*.tar.bz2
+  tags:
+    - sstelmo-shell-aea
+  only:
+    - merge_requests
+    - main
+    - dev
 
 test_build:
   stage: test
