@@ -1,6 +1,7 @@
 # Project files
 VERSION
 _version.py
+conda_build_artifacts
 
 # Temp files
 *.swp
