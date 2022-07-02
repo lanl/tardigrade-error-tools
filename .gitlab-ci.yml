@@ -75,7 +75,9 @@ fast-test:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   variables:
     GIT_STRATEGY: clone
-  script: ./CI.sh
+  script:
+    - ./BUILD.sh
+    - ./TEST.sh
   artifacts:
     when: always
     paths:
