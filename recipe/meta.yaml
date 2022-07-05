@@ -23,6 +23,7 @@ requirements:
     - python {{ python }}
     - boost >=1.59
     - cmake >=3.17
+    - doxygen
     - eigen >=3.3.7
     - gcc_linux-64 ==7.3.0
     - gxx_linux-64 ==7.3.0
