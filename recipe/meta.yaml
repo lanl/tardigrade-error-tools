@@ -18,7 +18,6 @@ build:
     - python_abi
 
 requirements:
-  # TODO: need to pin against SCR approved compiler, or at least build a variant to match (gcc 7.3.0)
   # TODO: need to pin the Python version, or at least build a variant to match (3.8.3)
   build:
     - python {{ python }}
