@@ -18,22 +18,24 @@ build:
     - python_abi
 
 requirements:
+  # TODO: need to pin against SCR approved compiler, or at least build a variant to match (gcc 7.3.0)
+  # TODO: need to pin the Python version, or at least build a variant to match (3.8.3)
   build:
     - python {{ python }}
+    - {{ compiler('cxx') }}
     - boost >=1.59
     - cmake >=3.17
     - doxygen
     - eigen >=3.3.7
-    - gcc_linux-64 ==7.3.0
-    - gxx_linux-64 ==7.3.0
   host:
     - python
-  run:
-    - python >=3.8
     - boost
     - eigen >=3.3.7
-    - gcc_linux-64 >=7.3.0
-    - gxx_linux-64 >=7.3.0
+  run:
+    - python >=3.8
+    - {{ compiler('cxx') }}
+    - boost
+    - eigen >=3.3.7
 
 test:
   source_files:
