@@ -31,7 +31,7 @@ requirements:
     - boost
     - eigen >=3.3.7
   run:
-    - python >=3.8
+    - python
     - {{ compiler('cxx') }}
     - boost
     - eigen >=3.3.7
