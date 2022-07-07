@@ -139,7 +139,7 @@ conda-build:
   artifacts:
     expire_in: '2 hrs'
     paths:
-      - conda-build-artifacts/noarch/error_tools-*-*.tar.bz2
+      - conda-build-artifacts/linux-64/error_tools-*-*.tar.bz2
   tags:
     - sstelmo-shell-aea
   only:
