@@ -26,8 +26,6 @@ requirements:
     - cmake >=3.17
     - doxygen
     - eigen >=3.3.7
-    - libgcc-ng ==7.3
-    - libstdcxx-ng ==7.3
   host:
     - python
     - boost
