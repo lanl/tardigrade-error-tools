@@ -13,6 +13,7 @@ Changelog
 Internal Changes
 ================
 - Build, package, and deploy as a Conda package to the AEA Conda channel (:merge:`23`). By `Kyle Brindley`_.
+- Fix the expected conda package architecture path (:merge:`24`). By `Kyle Brindley`_.
 
 
 ******************
