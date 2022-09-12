@@ -7,9 +7,34 @@ Changelog
 
 
 ******************
-0.2.3 (unreleased)
+0.3.1 (unreleased)
 ******************
 
+******************
+0.3.0 (08-24-2022)
+******************
+
+Release
+=======
+- Released version 0.3.0 (:merge:`26`)
+
+Internal Changes
+================
+- Build, package, and deploy as a Conda package to the AEA Conda channel (:merge:`23`). By `Kyle Brindley`_.
+- Fix the expected conda package architecture path (:merge:`24`). By `Kyle Brindley`_.
+- Made building the python interface optional (:merge:`25`). By `Nathan Miller`_.
+
+
+******************
+0.2.3 (2022-03-21)
+******************
+
+Internal Changes
+================
+- Update the build configuration to handle conda environments than manage cpp compilers and libraries (:issue:`5`
+  :merge:`18`). By `Kyle Brindley`_.
+- Add back compiler flags related to code warnings for the project wide compile options (:issue:`6`, :merge:`20`). By
+  `Kyle Brindley`_.
 
 ******************
 0.2.2 (2021-07-12)

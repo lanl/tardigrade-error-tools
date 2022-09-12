@@ -7,6 +7,9 @@ set(CPP_SRC_PATH "src/cpp")
 set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
 
+# Add a cached variable to build the python interface
+set(ERROR_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Boolean flag for whether the python bindings should be built")
+
 # Add the cmake folder to locate project CMake module(s)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
@@ -25,7 +28,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Set the c++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-Wall -ansi -pedantic -O3 -fmax-errors=5 -ggdb")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -ansi -pedantic -lrt")
 
 # Enable CTest
 enable_testing()
@@ -39,7 +42,9 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 # Add project source directories
 include_directories("${CPP_SRC_PATH}")
 add_subdirectory("${CPP_SRC_PATH}")
-add_subdirectory(${PYTHON_SRC_PATH})
+if(ERROR_TOOLS_BUILD_PYTHON_BINDINGS)
+    add_subdirectory(${PYTHON_SRC_PATH})
+endif()
 
 # Only add tests and documentation for current project builds. Protects downstream project builds.
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
