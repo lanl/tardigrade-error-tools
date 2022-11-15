@@ -10,6 +10,10 @@ Changelog
 0.3.1 (unreleased)
 ******************
 
+Internal Changes
+================
+- Remove upper bound compiler version on shared development environment (:merge:`29`). By `Kyle Brindley`_.
+
 ******************
 0.3.0 (08-24-2022)
 ******************
