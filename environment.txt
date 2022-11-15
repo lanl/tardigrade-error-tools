@@ -10,6 +10,7 @@ setuptools_scm
 pip
 pytest
 pytest-cov
+python
 sphinx>=3.0.4
 sphinx_rtd_theme>=0.4.3
 sphinxcontrib-bibtex
