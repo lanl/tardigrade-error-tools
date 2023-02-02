@@ -13,6 +13,8 @@ Changelog
 Internal Changes
 ================
 - Remove upper bound compiler version on shared development environment (:merge:`29`). By `Kyle Brindley`_.
+- Project configuration and conda build recipe changes to allow macOS builds and conda-build test stage (:merge:`31`).
+  By `Kyle Brindley`_.
 
 ******************
 0.3.0 (08-24-2022)
