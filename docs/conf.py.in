@@ -18,6 +18,7 @@ import os
 project = '@PROJECT_NAME@'
 RECENT_GIT_TAG = '@error_tools_RECENT_GIT_TAG@'
 VERSION_STRING_FULL = '@error_tools_VERSION_STRING_FULL@'
+VERSION = '@error_tools_VERSION@'
 
 # Hardcoded project information
 copyright = '2020, Nathan A. Miller and Kyle A. Brindley'
