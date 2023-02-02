@@ -18,19 +18,26 @@ build:
 
 requirements:
   build:
-    - boost >=1.59
+    - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
     - eigen >=3.3.7
+    - setuptools_scm >=6.2
   host:
-    - doxygen
-    - cmake >=3.17
+    - python
+    - cmake >=3.18
     - {{ compiler('cxx') }}
-    - boost >=1.59
-    - eigen >=3.3.7
+    - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
+    - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   run:
     - {{ compiler('cxx') }}
     - eigen >=3.3.7
 
 test:
+  requires:
+    - cmake >=3.18
+    - boost >=1.59
+    - {{ compiler('cxx') }}
+    - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
+    - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   source_files:
     - CMakeLists.txt
     - src/cpp/tests/CMakeLists.txt
@@ -38,6 +45,6 @@ test:
   commands:
     - mkdir build-package
     - cd build-package
-    - cmake ..
+    - cmake .. -DCMAKE_BUILD_TYPE=conda-test
     - cmake --build . --target test_error_tools
     - ctest -R test_error_tools
