@@ -7,6 +7,9 @@ set(CPP_SRC_PATH "src/cpp")
 set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
 
+# Add a cached variable to build the python interface
+set(ERROR_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Boolean flag for whether the python bindings should be built")
+
 # Add the cmake folder to locate project CMake module(s)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
 
@@ -15,9 +18,6 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 set(not_conda_test "true")
 if(cmake_build_type_lower STREQUAL "conda-test")
     set(not_conda_test "false")
-else()
-    # Add a cached variable to build the python interface
-    set(ERROR_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Boolean flag for whether the python bindings should be built")
 endif()
 
 # Get version number from Git
@@ -61,9 +61,9 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 if(${not_conda_test} STREQUAL "true")
     include_directories("${CPP_SRC_PATH}")
     add_subdirectory("${CPP_SRC_PATH}")
-endif()
-if(ERROR_TOOLS_BUILD_PYTHON_BINDINGS)
-    add_subdirectory(${PYTHON_SRC_PATH})
+    if(ERROR_TOOLS_BUILD_PYTHON_BINDINGS)
+        add_subdirectory(${PYTHON_SRC_PATH})
+    endif()
 endif()
 
 # Only add tests and documentation for current project builds. Protects downstream project builds.
