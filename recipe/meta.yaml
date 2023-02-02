@@ -18,12 +18,12 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - boost >=1.59
-    - cmake >=3.17
-    - doxygen
     - eigen >=3.3.7
   host:
+    - doxygen
+    - cmake >=3.17
+    - {{ compiler('cxx') }}
     - boost >=1.59
     - eigen >=3.3.7
   run:
