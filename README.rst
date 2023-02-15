@@ -150,7 +150,7 @@ Build the entire before performing the installation.
       $ cmake --install . --prefix path/to/conda/environment/
 
       # Example install to W-13 CI/CD conda environment performed by CI/CD institutional account
-      $ cmake --install . --prefix /projects/python/release
+      $ cmake --install . --prefix /projects/aea_compute/release
 
 *****************************
 Building the python interface
