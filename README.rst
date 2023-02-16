@@ -3,7 +3,7 @@ error\_tools
 ############
 
 *******************
-Project Description 
+Project Description
 *******************
 
 A collection of tools used for error handling. These tools provide a linked
@@ -43,7 +43,7 @@ For convenience, the minimal Python environment requirements for the
 documentation build are included in ``environment.txt``. A minimal anaconda
 environment for building the documentation can be created from an existing
 anaconda installation with the following commands.
- 
+
 .. code-block:: bash
 
    $ conda create --file environment.txt
@@ -56,11 +56,6 @@ Building the documentation
 
    **API Health Note**: The Sphinx API docs are a work-in-progress. The doxygen
    API is much more useful
-
-A build script has been created for convenience, ``new_build.sh``. It will build
-everything including the library binary, the test binary, and the documentation.
-This is the same build script used by ``jenkins_build.sh`` for CI builds and
-testing.
 
 sstelmo
 =======
@@ -77,17 +72,17 @@ sstelmo
 
       $ cd build/
 
-3) Run cmake3 configuration
- 
+3) Run cmake configuration
+
    .. code-block:: bash
 
-      $ cmake3 ..
+      $ cmake ..
 
 4) Build the docs
 
    .. code-block:: bash
 
-      $ cmake3 --build docs
+      $ cmake --build docs
 
 5) Sphinx HTML Documentation builds to:
 
@@ -119,7 +114,7 @@ Follow the steps for building the documentation and pick up below.
 
       $ pwd
       /path/to/error_tools/build
-      $ cmake3 --build src/cpp
+      $ cmake --build src/cpp
 
 *******************
 Install the library
@@ -133,7 +128,7 @@ Build the entire before performing the installation.
 
       $ pwd
       /path/to/error_tools/build
-      $ cmake3 --build .
+      $ cmake --build . --target all
 
 5) Install the library
 
@@ -167,7 +162,9 @@ sstelmo
 
    .. code-block:: bash
 
-      $ ./new_build.sh None
+      $ pwd
+      /path/to/error_tools/build
+      $ cmake --build . --target all
 
 2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)
 
