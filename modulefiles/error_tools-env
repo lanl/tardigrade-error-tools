@@ -76,11 +76,6 @@ append-path PYTHONPATH "$cubit_bin"
 prepend-path LD_LIBRARY_PATH "$environment_lib"
 prepend-path LD_LIBRARY_PATH "$cubit_bin_python"
 
-# Set some aliases similarly to W-13 compute servers
-# Reference - sstelmo.lanl.gov:/usr/share/Modules/modulefiles/python/2020.07-python-3.8
-set-alias ipy "ipython"
-set-alias nb "jupyter notebook"
-
 # Activate the Conda environment
 # Variables and functions from $anaconda_path/etc/profile.d/conda.sh initialization script that must be unset
 set conda_variables "CONDA_SHLVL CONDA_EXE _CE_CONDA CONDA_PYTHON_EXE"
