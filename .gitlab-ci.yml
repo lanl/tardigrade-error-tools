@@ -120,7 +120,7 @@ fast-test:
   variables:
     GIT_STRATEGY: clone
   script:
-    - ./BUILD.sh
+    - ./new_build.sh Release
     - ./TEST.sh
   artifacts:
     when: always
@@ -183,7 +183,7 @@ pages:
   variables:
     GIT_STRATEGY: clone
   script:
-    - ./BUILD.sh
+    - ./new_build.sh Release
     - mkdir public
     - cp -r build/docs/sphinx/html/* public/
   artifacts:
