@@ -17,6 +17,7 @@ Internal Changes
   By `Kyle Brindley`_.
 - Add mamba to CI environment and switch to mamba builds while troubleshooting conda issues (:issue:`12`, :merge:`33`,
   :merge:`34`). By `Kyle Brindley`_.
+- Add GCC 11 conda package build (:issue:`13`, :merge:`35`). By `Kyle Brindley`_.
 
 ******************
 0.3.0 (08-24-2022)
