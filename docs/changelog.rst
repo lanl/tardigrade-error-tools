@@ -21,6 +21,7 @@ Internal Changes
 - Force CI environment to build consistently from conda-forge (:merge:`36`). By `Kyle Brindley`_.
 - Prefer project-wide compiler options and remove ``-ansi`` to get consistent application of c++17 (:merge:`37`). By
   `Kyle Brindley`_.
+- Force compiler version match in conda-build variants (:merge:`38`). By `Kyle Brindley`_.
 
 ******************
 0.3.0 (08-24-2022)
