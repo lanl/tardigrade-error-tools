@@ -9,6 +9,10 @@ Changelog
 0.4.2 (unreleased)
 ******************
 
+Internal Changes
+================
+- Add GCC 10 conda package build (:issue:`16`, :merge:`42`). By `Sergio Cordova`_.
+
 New Features
 ============
 - Added stacktrace capability using nested exceptions (:merge:`41`). By `Nathan Miller`_.
