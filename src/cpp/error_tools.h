@@ -15,7 +15,7 @@
 #include<string>
 #include<iostream>
 #include<stdlib.h>
-#include<sstream.h>
+#include<sstream>
 #include<stdexcept>
 
 #define STACKTRACE_FORMAT(message, func, line, file)                               \
@@ -32,7 +32,7 @@
     catch(const std::exception &e){                                                \
         std::string message;                                                       \
         STACKTRACE_FORMAT(message, func, line, file)                               \
-        std::throw_with_nested(std::runtime_error( message ))                      \
+        std::throw_with_nested(std::runtime_error( message ));                     \
     }                                                                              \
     catch(...){                                                                    \
         std::string message;                                                       \
@@ -42,7 +42,7 @@
 
 #define ERROR_TOOLS_CATCH(expr) ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
-#define ERROR_TOOLS_CATCH_NODE_INTERNAL(expr, func, line, file)                    \
+#define ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
     if ( expr ){                                                                   \
         std::stringstream buffer;                                                  \
         std::streambuf * old = std::cerr.rdbuf( buffer.rdbuf( ) );                 \
@@ -50,10 +50,11 @@
         std::string message = buffer.str( );                                       \
         std::cerr.rdbuf( old );                                                    \
         STACKTRACE_FORMAT(message, func, line, file)                               \
-        throw std:runtime_error( message );                                        \
-    }
+        std::cerr << "here?\n";                                                    \
+        throw std::runtime_error( message );                                       \
+    }                                                                              \
 
-#define ERROR_TOOLS_CATCH_NODE(expr) ERROR_TOOLS_CATCH_NODE_INTERNAL(expr, __func__, __LINE__, __FILE__)
+#define ERROR_TOOLS_CATCH_NODE_POINTER(expr) ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 
 namespace errorTools{
