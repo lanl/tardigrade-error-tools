@@ -49,6 +49,7 @@ BOOST_AUTO_TEST_CASE( testReplaceAll ){
     std::string result = "The quick? brown fox jum?ped over the ?lazy dog?";
 
     BOOST_CHECK( result == test );
+
 }
 
 BOOST_AUTO_TEST_CASE( testPrint ){
@@ -133,5 +134,101 @@ BOOST_AUTO_TEST_CASE( testPrint ){
     answer = body;
     safe_n1.print( false );
     BOOST_CHECK( result.is_equal(answer) );
+
+}
+
+BOOST_AUTO_TEST_CASE( test_printNestedExceptions ){
+
+    boost::test_tools::output_test_stream result;
+
+    //Initialize test variables
+    std::string answer = "1 : error 1\n0 : error 2\n";
+    cerr_redirect guard( result.rdbuf() );
+    
+    try{
+        try{
+            throw std::runtime_error( "error 1" );
+        }
+        catch( std::exception &e ){
+            std::throw_with_nested( std::logic_error( "error 2" ) );
+        }
+    }
+    catch( std::exception &e ){
+        errorTools::printNestedExceptions( e );
+    }
+    catch(...){
+        BOOST_CHECK( false );
+    }
+
+    BOOST_CHECK( result.is_equal( answer ) );
+
+}
+
+void badFunction( ){
+    ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) );
+}
+
+void containsBadFunction( ){
+    ERROR_TOOLS_CATCH( badFunction( ) );
+}
+
+void goodFunction( ){
+    return;
+}
+
+errorTools::Node* goodNodeFunction( ){
+    return NULL;
+}
+
+errorTools::Node* badNodeFunction( ){
+    return new errorTools::Node( __func__, "oops" );
+}
+
+errorTools::Node* containsBadNodeFunction( ){
+    errorTools::Node *error = badNodeFunction( );
+    if ( error ){
+        errorTools::Node *result = new errorTools::Node( __func__, "error 2");
+        result->addNext( error );
+        return result;
+    }
+    return NULL;
+}
+
+BOOST_AUTO_TEST_CASE( test_form_stacktrace ){
+
+    boost::test_tools::output_test_stream result;
+
+    //Initialize test variables
+    cerr_redirect guard( result.rdbuf( ) );
+
+    ERROR_TOOLS_CATCH( goodFunction( ) );
+
+    try{
+        ERROR_TOOLS_CATCH( containsBadFunction( ) );
+    }
+    catch( std::exception &e ){
+        errorTools::printNestedExceptions( e );
+    }
+
+    BOOST_CHECK( !result.is_empty( ) );
+
+}
+
+BOOST_AUTO_TEST_CASE( test_form_node_stacktrace ){
+
+    boost::test_tools::output_test_stream result;
+
+    cerr_redirect guard( result.rdbuf( ) );
+
+    ERROR_TOOLS_CATCH_NODE_POINTER( goodNodeFunction( ) );
+
+    try{
+        ERROR_TOOLS_CATCH_NODE_POINTER( containsBadNodeFunction( ) );
+    }
+    catch( std::exception &e ){
+        std::cerr << e.what( ) << "\n";
+    }
+
+    BOOST_CHECK( !result.is_empty( ) );
 
 }

@@ -9,6 +9,10 @@ Changelog
 0.4.2 (unreleased)
 ******************
 
+New Features
+============
+- Added stacktrace capability using nested exceptions (:merge:`41`). By `Nathan Miller`_.
+
 ******************
 0.4.1 (2023-03-16)
 ******************

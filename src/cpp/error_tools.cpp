@@ -77,4 +77,22 @@ namespace errorTools{
 
         return;
     }
+
+    void printNestedExceptions( const std::exception &e, std::size_t depth, std::string message){
+
+        message = std::to_string( depth ) + std::string( " : " ) + e.what( ) + std::string( "\n" ) + message;
+
+        try {
+
+            std::rethrow_if_nested( e );
+            std::cerr << message;
+
+        }
+        catch ( const std::exception &nested ){
+
+            printNestedExceptions( nested, depth + 1, message );
+ 
+       }
+    }
+
 }

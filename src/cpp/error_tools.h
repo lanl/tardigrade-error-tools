@@ -15,6 +15,47 @@
 #include<string>
 #include<iostream>
 #include<stdlib.h>
+#include<sstream>
+#include<stdexcept>
+
+#define STACKTRACE_FORMAT(message, func, line, file)                               \
+        message += file;                                                           \
+        message += " ( ";                                                          \
+        message += std::to_string( line );                                         \
+        message += " ): ";                                                         \
+        message += func;                                                           \
+
+#define ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
+    try{                                                                           \
+        expr;                                                                      \
+    }                                                                              \
+    catch(const std::exception &e){                                                \
+        std::string message;                                                       \
+        STACKTRACE_FORMAT(message, func, line, file)                               \
+        std::throw_with_nested(std::runtime_error( message ));                     \
+    }                                                                              \
+    catch(...){                                                                    \
+        std::string message;                                                       \
+        STACKTRACE_FORMAT(message, func, line, file)                               \
+        std::throw_with_nested(std::runtime_error( message ));                     \
+    }                                                                              \
+
+#define ERROR_TOOLS_CATCH(expr) ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
+
+#define ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
+    if ( expr ){                                                                   \
+        std::stringstream buffer;                                                  \
+        std::streambuf * old = std::cerr.rdbuf( buffer.rdbuf( ) );                 \
+        expr->print( );                                                            \
+        std::string message = buffer.str( );                                       \
+        std::cerr.rdbuf( old );                                                    \
+        STACKTRACE_FORMAT(message, func, line, file)                               \
+        std::cerr << "here?\n";                                                    \
+        throw std::runtime_error( message );                                       \
+    }                                                                              \
+
+#define ERROR_TOOLS_CATCH_NODE_POINTER(expr) ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
+
 
 namespace errorTools{
 
@@ -66,6 +107,10 @@ namespace errorTools{
 
             void print( const bool header = true );
     };
+
+    void printNestedExceptions( const std::exception &e, std::size_t depth = 0, std::string message = "");
+
 }
+
 
 #endif
