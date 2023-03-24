@@ -1,2 +1,4 @@
 .. email addresses
+.. _`Nathan Miller`: nathanm@lanl.gov
 .. _`Kyle Brindley`: kbrindley@lanl.gov
+.. _`Sergio Cordova`: sergioc@lanl.gov
