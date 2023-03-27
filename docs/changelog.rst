@@ -6,7 +6,11 @@ Changelog
 #########
 
 ******************
-0.4.2 (unreleased)
+0.5.1 (unreleased)
+******************
+
+******************
+0.5.0 (2023-03-27)
 ******************
 
 Internal Changes
@@ -16,6 +20,10 @@ Internal Changes
 New Features
 ============
 - Added stacktrace capability using nested exceptions (:merge:`41`). By `Nathan Miller`_.
+
+Documentation
+=============
+- Added documentation for the new macros, functions, and a quick-start user manual (:merge:`44`). By `Nathan Miller`_.
 
 ******************
 0.4.1 (2023-03-16)

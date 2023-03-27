@@ -18,6 +18,14 @@
 #include<sstream>
 #include<stdexcept>
 
+
+/*!
+    \brief Formatting of each line of the stacktrace
+    \param message: The std::string message to be appended to
+    \param func: A standard string or char function name
+    \param line: The integer filename
+    \param file: A standard string or char filename
+*/
 #define STACKTRACE_FORMAT(message, func, line, file)                               \
         message += file;                                                           \
         message += " ( ";                                                          \
@@ -25,6 +33,14 @@
         message += " ): ";                                                         \
         message += func;                                                           \
 
+/*!
+    \brief An internal macro to catch exceptions and add additional information
+           Not intended to be used in user code 
+    \param expr: The expression to be evaluated
+    \param func: A standard string or char function name
+    \param line: The integer filename
+    \param file: A standard string or char filename
+*/
 #define ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
     try{                                                                           \
         expr;                                                                      \
@@ -40,8 +56,22 @@
         std::throw_with_nested(std::runtime_error( message ));                     \
     }                                                                              \
 
+
+/*!
+    \brief A macro to catch exceptions and add additional information
+    \param expr: The expression to be evaluated
+*/
 #define ERROR_TOOLS_CATCH(expr) ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
+/*!
+    \brief An internal macro to catch errorTools::Node pointers and convert them to exceptions
+           Not intended to be used in user code 
+    \param expr: The expression to be evaluated that returns a pointer
+        to an errorTools::Node object
+    \param func: A standard string or char function name
+    \param line: The integer filename
+    \param file: A standard string or char filename
+*/
 #define ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
     if ( expr ){                                                                   \
         std::stringstream buffer;                                                  \
@@ -50,10 +80,13 @@
         std::string message = buffer.str( );                                       \
         std::cerr.rdbuf( old );                                                    \
         STACKTRACE_FORMAT(message, func, line, file)                               \
-        std::cerr << "here?\n";                                                    \
         throw std::runtime_error( message );                                       \
     }                                                                              \
 
+/*!
+    \brief A macro to catch errorTools::Node pointers and convert them to exceptions
+    \param expr: The expression to be evaluated
+*/
 #define ERROR_TOOLS_CATCH_NODE_POINTER(expr) ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 
