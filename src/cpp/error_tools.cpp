@@ -79,6 +79,15 @@ namespace errorTools{
     }
 
     void printNestedExceptions( const std::exception &e, std::size_t depth, std::string message){
+        /*!
+         * Print the nested exceptions starting with the one deepest (closest to the error) and ending
+         * with the outermost function call. Users should call this function by just passing in the
+         * exception. The other arguments are for recursion.
+         * 
+         * \param &e: The nested exceptions
+         * \param depth: The current depth (defaults to zero)
+         * \param message: The output message (defaults to "")
+         */
 
         message = std::to_string( depth ) + std::string( " : " ) + e.what( ) + std::string( "\n" ) + message;
 
