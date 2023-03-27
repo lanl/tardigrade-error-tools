@@ -12,6 +12,7 @@ Changelog
 Internal Changes
 ================
 - Add GCC 10 conda package build (:issue:`16`, :merge:`42`). By `Sergio Cordova`_.
+- Removed GCC 7 conda package build (:issue:`18`, :merge:`43`). By `Sergio Cordova`_.
 
 New Features
 ============
