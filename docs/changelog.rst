@@ -6,8 +6,25 @@ Changelog
 #########
 
 ******************
-0.4.2 (unreleased)
+0.5.1 (unreleased)
 ******************
+
+******************
+0.5.0 (2023-03-27)
+******************
+
+Internal Changes
+================
+- Add GCC 10 conda package build (:issue:`16`, :merge:`42`). By `Sergio Cordova`_.
+- Removed GCC 7 conda package build (:issue:`18`, :merge:`43`). By `Sergio Cordova`_.
+
+New Features
+============
+- Added stacktrace capability using nested exceptions (:merge:`41`). By `Nathan Miller`_.
+
+Documentation
+=============
+- Added documentation for the new macros, functions, and a quick-start user manual (:merge:`44`). By `Nathan Miller`_.
 
 ******************
 0.4.1 (2023-03-16)

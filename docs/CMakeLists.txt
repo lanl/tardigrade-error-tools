@@ -45,6 +45,7 @@ configure_file(${SPHINX_IN} ${SPHINX_OUT} @ONLY)
 set(DOCUMENTATION_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/index.rst
     ${CMAKE_CURRENT_SOURCE_DIR}/api.rst
+    ${CMAKE_CURRENT_SOURCE_DIR}/user.rst
     ${CMAKE_CURRENT_SOURCE_DIR}/changelog.rst
     ${CMAKE_CURRENT_SOURCE_DIR}/targets.txt
 )
