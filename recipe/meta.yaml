@@ -10,7 +10,7 @@ build:
   script:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=Release
+    - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --build . --target error_tools
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
@@ -47,6 +47,6 @@ test:
   commands:
     - mkdir build-package
     - cd build-package
-    - cmake .. -DCMAKE_BUILD_TYPE=conda-test
+    - cmake .. -DCMAKE_BUILD_TYPE=conda-test -DCMAKE_INSTALL_LIBDIR=lib
     - cmake --build . --target test_error_tools
     - ctest -R test_error_tools
