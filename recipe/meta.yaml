@@ -32,12 +32,10 @@ build:
     - python_abi
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - setuptools_scm >=6.2
   host:
     - {{ compiler('cxx') }}
     - python
+    - setuptools_scm >=6.2
     - cmake >=3.18
     - eigen >=3.3.7
     - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
