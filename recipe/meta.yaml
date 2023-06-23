@@ -3,10 +3,25 @@ package:
   # TODO: setup and use pyproject.toml and a Conda build Jinja template
   version: {{ VERSION }}
 
+about:
+  home: https://github.com/lanl/tardigrade-error-tools
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: 'A collection of tools used for error handling. '
+  description: |
+    tardigrade-error-tools (C20048 Tardigrade) A collection of tools used for error handling. These tools provide a
+    linked list class which can help a user both understand where an error happened and also help the developer to
+    correct for the errors.
+  doc_url: https://lanl.github.io/tardigrade-error-tools
+  dev_url: https://github.com/lanl/tardigrade-error-tools
+
 source:
   path: '..'
 
 build:
+  number: 0
+  script_env:
+    - SETUPTOOLS_SCM_PRETEND_VERSION={{ VERSION }}
   script:
     - mkdir build-package
     - cd build-package
@@ -17,19 +32,15 @@ build:
     - python_abi
 
 requirements:
-  build:
-    - {{ compiler('cxx') }}
-    - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
-    - eigen >=3.3.7
-    - setuptools_scm >=6.2
-    - libcxx <16  # [osx]
   host:
     - {{ compiler('cxx') }}
     - python
+    - setuptools_scm >=6.2
     - cmake >=3.18
+    - eigen >=3.3.7
+    - boost >=1.59  # TODO: Separate the package/test configuration to make BOOST an optional build dependency
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
-    - libcxx <16  # [osx]
   run:
     - {{ compiler('cxx') }}
     - eigen >=3.3.7
