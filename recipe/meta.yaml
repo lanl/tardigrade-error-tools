@@ -34,7 +34,7 @@ build:
 requirements:
   host:
     - {{ compiler('cxx') }}
-    - libcxx {{ libcxx }}
+    - libcxx {{ libcxx }}  # [osx]
     - python
     - setuptools_scm >=6.2
     - cmake >=3.18
@@ -51,7 +51,7 @@ requirements:
 test:
   requires:
     - {{ compiler('cxx') }}
-    - libcxx {{ libcxx }}
+    - libcxx {{ libcxx }}  # [osx]
     - cmake >=3.18
     - boost >=1.59
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
