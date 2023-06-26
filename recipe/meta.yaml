@@ -36,7 +36,6 @@ requirements:
     - {{ compiler('cxx') }}
     - libgcc-ng {{ libstdcxx }}     # [linux]
     - libstdcxx-ng {{ libstdcxx }}  # [linux]
-    - libcxx {{ libcxx }}           # [osx]
     - python
     - setuptools_scm >=6.2
     - cmake >=3.18
@@ -55,7 +54,6 @@ test:
     - {{ compiler('cxx') }}
     - {{ pin_compatible('libgcc-ng') }}     # [linux]
     - {{ pin_compatible('libstdcxx-ng') }}  # [linux]
-    - {{ pin_compatible('libcxx') }}        # [osx]
     - cmake >=3.18
     - boost >=1.59
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
