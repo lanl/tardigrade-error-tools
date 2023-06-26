@@ -152,9 +152,9 @@ conda-build:
     - if: $CI_COMMIT_BRANCH == "dev"
   script:
     # Only build one compiler variant during merge request testing
-    - libcxx="13"
+    - libstdcxx="13"
     - variants=""
-    - if [[ $CI_PIPELINE_SOURCE == "merge_request_event" ]]; then variants="--variants {'libstdcxx-ng':['${libcxx}']}"; fi
+    - if [[ $CI_PIPELINE_SOURCE == "merge_request_event" ]]; then variants="--variants {'libstdcxx':['${libstdcxx}.*']}"; fi
     # Set the LANL internal proxies
     - export ALL_PROXY="proxyout.lanl.gov:8080"
     - export HTTP_PROXY="http://$ALL_PROXY"
