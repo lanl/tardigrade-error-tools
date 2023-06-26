@@ -53,6 +53,7 @@ requirements:
 test:
   requires:
     - {{ compiler('cxx') }}
+    - {{ pin_compatible('libcxx') }}  # [osx]
     - cmake >=3.18
     - boost >=1.59
     - doxygen  # TODO: Separate the package/documentation configuration to make Doxygen an optional build dependency
