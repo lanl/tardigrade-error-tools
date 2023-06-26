@@ -1,5 +1,5 @@
-libstdcxx-ng:  # [linux]
-  - 12         # [linux]
-  - 13         # [linux]
+libstdcxx:  # [linux]
+  - 12      # [linux]
+  - 13      # [linux]
 libcxx:  # [osx]
   - 15   # [osx]

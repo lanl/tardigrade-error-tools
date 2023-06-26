@@ -34,6 +34,8 @@ build:
 requirements:
   host:
     - {{ compiler('cxx') }}
+    - libgcc-ng {{ libstdcxx }}  # [linux]
+    - libstdcxx-ng {{ libstdcxx }} # [linux]
     - libcxx {{ libcxx }}  # [osx]
     - python
     - setuptools_scm >=6.2
@@ -51,6 +53,8 @@ requirements:
 test:
   requires:
     - {{ compiler('cxx') }}
+    - libgcc-ng {{ libstdcxx }}  # [linux]
+    - libstdcxx-ng {{ libstdcxx }} # [linux]
     - libcxx {{ libcxx }}  # [osx]
     - cmake >=3.18
     - boost >=1.59
