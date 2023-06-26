@@ -43,6 +43,9 @@ requirements:
     - sphinx  # TODO: Separate the package/documentation configuration to make Sphinx an optional build dependency
   run:
     - eigen >=3.3.7
+    - libgcc-ng     # [linux]
+    - libstdcxx-ng  # [linux]
+    - libcxx        # [osx]
 
 test:
   requires:
