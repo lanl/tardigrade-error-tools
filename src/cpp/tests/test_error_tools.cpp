@@ -165,11 +165,11 @@ BOOST_AUTO_TEST_CASE( test_printNestedExceptions ){
 }
 
 void badFunction( ){
-    ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) );
 }
 
 void containsBadFunction( ){
-    ERROR_TOOLS_CATCH( badFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( badFunction( ) );
 }
 
 void goodFunction( ){
@@ -201,10 +201,10 @@ BOOST_AUTO_TEST_CASE( test_form_stacktrace ){
     //Initialize test variables
     cerr_redirect guard( result.rdbuf( ) );
 
-    ERROR_TOOLS_CATCH( goodFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( goodFunction( ) );
 
     try{
-        ERROR_TOOLS_CATCH( containsBadFunction( ) );
+        TARDIGRADE_ERROR_TOOLS_CATCH( containsBadFunction( ) );
     }
     catch( std::exception &e ){
         errorTools::printNestedExceptions( e );
@@ -220,10 +220,10 @@ BOOST_AUTO_TEST_CASE( test_form_node_stacktrace ){
 
     cerr_redirect guard( result.rdbuf( ) );
 
-    ERROR_TOOLS_CATCH_NODE_POINTER( goodNodeFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( goodNodeFunction( ) );
 
     try{
-        ERROR_TOOLS_CATCH_NODE_POINTER( containsBadNodeFunction( ) );
+        TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( containsBadNodeFunction( ) );
     }
     catch( std::exception &e ){
         std::cerr << e.what( ) << "\n";

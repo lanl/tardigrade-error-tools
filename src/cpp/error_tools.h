@@ -8,8 +8,8 @@
   ******************************************************************************
   */
 
-#ifndef ERROR_TOOLS_H
-#define ERROR_TOOLS_H
+#ifndef TARDIGRADE_ERROR_TOOLS_H
+#define TARDIGRADE_ERROR_TOOLS_H
 
 #include<memory>
 #include<string>
@@ -41,7 +41,7 @@
     \param line: The integer filename
     \param file: A standard string or char filename
 */
-#define ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
+#define TARDIGRADE_ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
     try{                                                                           \
         expr;                                                                      \
     }                                                                              \
@@ -61,7 +61,7 @@
     \brief A macro to catch exceptions and add additional information
     \param expr: The expression to be evaluated
 */
-#define ERROR_TOOLS_CATCH(expr) ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
+#define TARDIGRADE_ERROR_TOOLS_CATCH(expr) TARDIGRADE_ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 /*!
     \brief An internal macro to catch errorTools::Node pointers and convert them to exceptions
@@ -72,7 +72,7 @@
     \param line: The integer filename
     \param file: A standard string or char filename
 */
-#define ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
+#define TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
     if ( expr ){                                                                   \
         std::stringstream buffer;                                                  \
         std::streambuf * old = std::cerr.rdbuf( buffer.rdbuf( ) );                 \
@@ -87,7 +87,7 @@
     \brief A macro to catch errorTools::Node pointers and convert them to exceptions
     \param expr: The expression to be evaluated
 */
-#define ERROR_TOOLS_CATCH_NODE_POINTER(expr) ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
+#define TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER(expr) TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 
 namespace errorTools{

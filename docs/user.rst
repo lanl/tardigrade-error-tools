@@ -18,18 +18,18 @@ Exception Handling
 ------------------
 
 `error_tools.h` contains macros which will be used by the pre-processor to substitute in code at
-compile time. The two macros of importance here are `ERROR_TOOLS_CATCH` and
-`ERROR_TOOLS_CATCH_NODE_POINTER`. The first macro can be used to wrap exceptions or function calls
+compile time. The two macros of importance here are `TARDIGRADE_ERROR_TOOLS_CATCH` and
+`TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER`. The first macro can be used to wrap exceptions or function calls
 that may cause exceptions to provide stack information on error. The second macro can be used to
 convert the old, linked-list, style method to the exception format. By way of example, we present
 a simple block of code which demonstrates the utility.::
 
     void badFunction( ){
-        ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) ); //LN1
+        TARDIGRADE_ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) ); //LN1
     }
     
     void containsBadFunction( ){
-        ERROR_TOOLS_CATCH( badFunction( ) ); // LN2
+        TARDIGRADE_ERROR_TOOLS_CATCH( badFunction( ) ); // LN2
     }
     
     void goodFunction( ){
@@ -39,7 +39,7 @@ a simple block of code which demonstrates the utility.::
     void test_form_stacktrace( ){
 
         try{
-            ERROR_TOOLS_CATCH( containsBadFunction( ) ); //LN3
+            TARDIGRADE_ERROR_TOOLS_CATCH( containsBadFunction( ) ); //LN3
         }
         catch( std::exception &e ){
             errorTools::printNestedExceptions( e );
@@ -62,7 +62,7 @@ Node interface
 --------------
 
 In addition to the more modern, and recommended, method presented above we also provide a macro
-`ERROR_TOOLS_CATCH_NODE_POINTER` to enable interface with the older `error_tools` utility.
+`TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER` to enable interface with the older `error_tools` utility.
 Historically errors were handled by returning pointers to the last member of a linked list of
 `errorTools::Node` objects i.e.,::
 
@@ -81,7 +81,7 @@ Historically errors were handled by returning pointers to the last member of a l
 This is effective but requires development and maintinence of a class. For functions which use the
 old `errorTools::Node` based system one can do the following::
 
-    ERROR_TOOLS_CATCH_NODE_POINTER( myFunction( ... ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( myFunction( ... ) );
 
 which will convert the `errorTools::Node*` to an exception. We will provide this utility until all
 of the node-based approaches have been removed from the libraries.
