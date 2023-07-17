@@ -42,7 +42,7 @@ a simple block of code which demonstrates the utility.::
             TARDIGRADE_ERROR_TOOLS_CATCH( containsBadFunction( ) ); //LN3
         }
         catch( std::exception &e ){
-            errorTools::printNestedExceptions( e );
+            tardigradeErrorTools::printNestedExceptions( e );
         }
 
     }
@@ -64,13 +64,13 @@ Node interface
 In addition to the more modern, and recommended, method presented above we also provide a macro
 `TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER` to enable interface with the older `error_tools` utility.
 Historically errors were handled by returning pointers to the last member of a linked list of
-`errorTools::Node` objects i.e.,::
+`tardigradeErrorTools::Node` objects i.e.,::
 
-    errorTools::Node *error = myFunction( ... )
+    tardigradeErrorTools::Node *error = myFunction( ... )
     
     if ( error ){ //Checks if the pointer is not NULL
         
-        errorTools::Node *result = new errorTools::Node( __func__, "My error message" ); //Func is a macro that gives the current funtion name
+        tardigradeErrorTools::Node *result = new tardigradeErrorTools::Node( __func__, "My error message" ); //Func is a macro that gives the current funtion name
     
         result->addNext( error );
     
@@ -79,9 +79,9 @@ Historically errors were handled by returning pointers to the last member of a l
     }
 
 This is effective but requires development and maintinence of a class. For functions which use the
-old `errorTools::Node` based system one can do the following::
+old `tardigradeErrorTools::Node` based system one can do the following::
 
     TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( myFunction( ... ) );
 
-which will convert the `errorTools::Node*` to an exception. We will provide this utility until all
+which will convert the `tardigradeErrorTools::Node*` to an exception. We will provide this utility until all
 of the node-based approaches have been removed from the libraries.

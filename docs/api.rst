@@ -10,7 +10,7 @@ error_tools.cpp
 ***************
 
 .. doxygenfile:: error_tools.cpp
-.. doxygenclass:: errorTools::Node
+.. doxygenclass:: tardigradeErrorTools::Node
    :members:
    :undoc-members:
 
