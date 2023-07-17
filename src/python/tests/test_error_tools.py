@@ -4,7 +4,7 @@ import difflib
 
 import pytest
 
-import error_tools
+import tardigrade_error_tools
 
 
 function_string = "some_function"
@@ -32,7 +32,7 @@ def test_PyNode_print(capfd, function_string, error_string, answer):
     :param str answer: The expected output
     """
 
-    node = error_tools.PyNode("function","error")
+    node = tardigrade_error_tools.PyNode("function","error")
 
     node.print_error()
 

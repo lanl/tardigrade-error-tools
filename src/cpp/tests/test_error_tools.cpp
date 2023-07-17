@@ -1,14 +1,14 @@
 /**
-  * \file test_error_tools.cpp
+  * \file test_tardigrade_error_tools.cpp
   *
-  * Tests for error_tools
+  * Tests for tardigrade_error_tools
   */
 
-#include<error_tools.h>
+#include<tardigrade_error_tools.h>
 #include<sstream>
 #include<fstream>
 
-#define BOOST_TEST_MODULE test_error_tools
+#define BOOST_TEST_MODULE test_tardigrade_error_tools
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/tools/output_test_stream.hpp>
 

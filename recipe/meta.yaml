@@ -1,5 +1,5 @@
 package:
-  name: error_tools
+  name: tardigrade_error_tools
   # TODO: setup and use pyproject.toml and a Conda build Jinja template
   version: {{ VERSION }}
 
@@ -26,7 +26,7 @@ build:
     - mkdir build-package
     - cd build-package
     - cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
-    - cmake --build . --target error_tools
+    - cmake --build . --target tardigrade_error_tools
     - cmake --install . --prefix $PREFIX
   ignore_run_exports:
     - python_abi
@@ -61,10 +61,10 @@ test:
   source_files:
     - CMakeLists.txt
     - src/cpp/tests/CMakeLists.txt
-    - src/cpp/tests/test_error_tools.cpp
+    - src/cpp/tests/test_tardigrade_error_tools.cpp
   commands:
     - mkdir build-package
     - cd build-package
     - cmake .. -DCMAKE_BUILD_TYPE=conda-test -DCMAKE_INSTALL_LIBDIR=lib
-    - cmake --build . --target test_error_tools
-    - ctest -R test_error_tools
+    - cmake --build . --target test_tardigrade_error_tools
+    - ctest -R test_tardigrade_error_tools

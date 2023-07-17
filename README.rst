@@ -13,8 +13,8 @@ and also help the developer to correct for the errors.
 Information
 ===========
 
-* Documentation: https://aea.re-pages.lanl.gov/material-models/error_tools
-* Wiki: https://re-git.lanl.gov/aea/material-models/error_tools/-/wikis/home
+* Documentation: https://aea.re-pages.lanl.gov/material-models/tardigrade_error_tools
+* Wiki: https://re-git.lanl.gov/aea/material-models/tardigrade_error_tools/-/wikis/home
 
 Developers
 ==========
@@ -88,7 +88,7 @@ sstelmo
 
    .. code-block:: bash
 
-      error_tools/build/docs/sphinx/html/index.html
+      tardigrade_error_tools/build/docs/sphinx/html/index.html
 
 6) Display docs
 
@@ -113,7 +113,7 @@ Follow the steps for building the documentation and pick up below.
    .. code-block:: bash
 
       $ pwd
-      /path/to/error_tools/build
+      /path/to/tardigrade_error_tools/build
       $ cmake --build src/cpp
 
 *******************
@@ -127,7 +127,7 @@ Build the entire before performing the installation.
    .. code-block:: bash
 
       $ pwd
-      /path/to/error_tools/build
+      /path/to/tardigrade_error_tools/build
       $ cmake --build . --target all
 
 5) Install the library
@@ -135,7 +135,7 @@ Build the entire before performing the installation.
    .. code-block:: bash
 
       $ pwd
-      /path/to/error_tools/build
+      /path/to/tardigrade_error_tools/build
       $ cmake --install . --prefix path/to/root/install
 
       # Example local user (non-admin) Linux install
@@ -151,7 +151,7 @@ Build the entire before performing the installation.
 Building the python interface
 *****************************
 
-A python interface to the ``error_tools`` C++ routines is provided. After the
+A python interface to the ``tardigrade_error_tools`` C++ routines is provided. After the
 libraries have been built, they can be linked so that they can be called with
 python.
 
@@ -163,7 +163,7 @@ sstelmo
    .. code-block:: bash
 
       $ pwd
-      /path/to/error_tools/build
+      /path/to/tardigrade_error_tools/build
       $ cmake --build . --target all
 
 2) Activate a [W-13 Python Environment](https://xcp-confluence.lanl.gov/display/PYT/The+W-13+Python+3+environment)

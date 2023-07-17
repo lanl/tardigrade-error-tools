@@ -8,7 +8,7 @@ User Manual
 Quick Start
 ***********
 
-Two methods currently exist for error handling within the error_tools library. The first is the
+Two methods currently exist for error handling within the tardigrade_error_tools library. The first is the
 construction of linked lists which can be used to unwind errors to the root cause and the second,
 which is the path going forward, are macros which enable systematic catching of exceptions such
 that a stack trace can be generated. This second method is believed to be more general than the
@@ -17,7 +17,7 @@ linked list approach and also requires less custom software to implement.
 Exception Handling
 ------------------
 
-`error_tools.h` contains macros which will be used by the pre-processor to substitute in code at
+`tardigrade_error_tools.h` contains macros which will be used by the pre-processor to substitute in code at
 compile time. The two macros of importance here are `TARDIGRADE_ERROR_TOOLS_CATCH` and
 `TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER`. The first macro can be used to wrap exceptions or function calls
 that may cause exceptions to provide stack information on error. The second macro can be used to
@@ -62,7 +62,7 @@ Node interface
 --------------
 
 In addition to the more modern, and recommended, method presented above we also provide a macro
-`TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER` to enable interface with the older `error_tools` utility.
+`TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER` to enable interface with the older `tardigrade_error_tools` utility.
 Historically errors were handled by returning pointers to the last member of a linked list of
 `tardigradeErrorTools::Node` objects i.e.,::
 

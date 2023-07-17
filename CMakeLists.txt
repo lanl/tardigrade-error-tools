@@ -1,6 +1,6 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
-project(error_tools)
+project(tardigrade_error_tools)
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")

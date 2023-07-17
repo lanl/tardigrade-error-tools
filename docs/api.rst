@@ -6,16 +6,16 @@
     :maxdepth: 2
 
 ***************
-error_tools.cpp
+tardigrade_error_tools.cpp
 ***************
 
-.. doxygenfile:: error_tools.cpp
+.. doxygenfile:: tardigrade_error_tools.cpp
 .. doxygenclass:: tardigradeErrorTools::Node
    :members:
    :undoc-members:
 
 *************
-error_tools.h
+tardigrade_error_tools.h
 *************
 
-.. doxygenfile:: error_tools.h
+.. doxygenfile:: tardigrade_error_tools.h

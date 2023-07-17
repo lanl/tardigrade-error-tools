@@ -1,6 +1,6 @@
 set(CYTHON_SOURCE_FILES
-    error_tools_python.pxd
-    error_tools_python.pyx
+    tardigrade_error_tools_python.pxd
+    tardigrade_error_tools_python.pyx
     setup.py
     settings.py.in
     conftest.py
