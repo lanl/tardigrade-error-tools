@@ -1,14 +1,14 @@
 /**
-  * \file test_error_tools.cpp
+  * \file test_tardigrade_error_tools.cpp
   *
-  * Tests for error_tools
+  * Tests for tardigrade_error_tools
   */
 
-#include<error_tools.h>
+#include<tardigrade_error_tools.h>
 #include<sstream>
 #include<fstream>
 
-#define BOOST_TEST_MODULE test_error_tools
+#define BOOST_TEST_MODULE test_tardigrade_error_tools
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/tools/output_test_stream.hpp>
 
@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE( testReplaceAll ){
      */
 
     std::string test = "The quick\n brown fox jum\nped over the \nlazy dog\n";
-    errorTools::replaceAll(test, "\n", "?");
+    tardigradeErrorTools::replaceAll(test, "\n", "?");
 
     std::string result = "The quick? brown fox jum?ped over the ?lazy dog?";
 
@@ -67,15 +67,15 @@ BOOST_AUTO_TEST_CASE( testPrint ){
     cerr_redirect guard( result.rdbuf() );
 
     //Initialize test error node stack
-    errorTools::Node *n4 = new errorTools::Node("fxn4", "problem in addition\n");
+    tardigradeErrorTools::Node *n4 = new tardigradeErrorTools::Node("fxn4", "problem in addition\n");
 
-    errorTools::Node *n3 = new errorTools::Node("fxn3", "error in fxn4\n");
+    tardigradeErrorTools::Node *n3 = new tardigradeErrorTools::Node("fxn3", "error in fxn4\n");
     n3->addNext(n4);
 
-    errorTools::Node *n2 = new errorTools::Node("fxn2", "error in fxn3\n");
+    tardigradeErrorTools::Node *n2 = new tardigradeErrorTools::Node("fxn2", "error in fxn3\n");
     n2->addNext(n3);
 
-    errorTools::Node n1("fxn1", "error in fxn2\n");
+    tardigradeErrorTools::Node n1("fxn1", "error in fxn2\n");
     n1.addNext(n2);
 
     //Construct expected strings
@@ -111,18 +111,18 @@ BOOST_AUTO_TEST_CASE( testPrint ){
 
     //Test of the print utility using safe pointers
     //Initialize test error node stack
-    std::unique_ptr< errorTools::Node > safe_n4;
-    safe_n4.reset( new errorTools::Node("fxn4", "problem in addition\n") );
+    std::unique_ptr< tardigradeErrorTools::Node > safe_n4;
+    safe_n4.reset( new tardigradeErrorTools::Node("fxn4", "problem in addition\n") );
 
-    std::unique_ptr< errorTools::Node > safe_n3;
-    safe_n3.reset( new errorTools::Node("fxn3", "error in fxn4\n") );
+    std::unique_ptr< tardigradeErrorTools::Node > safe_n3;
+    safe_n3.reset( new tardigradeErrorTools::Node("fxn3", "error in fxn4\n") );
     safe_n3->addNext(safe_n4);
 
-    std::unique_ptr< errorTools::Node > safe_n2;
-    safe_n2.reset( new errorTools::Node("fxn2", "error in fxn3\n") );
+    std::unique_ptr< tardigradeErrorTools::Node > safe_n2;
+    safe_n2.reset( new tardigradeErrorTools::Node("fxn2", "error in fxn3\n") );
     safe_n2->addNext(safe_n3);
 
-    errorTools::Node safe_n1("fxn1", "error in fxn2\n");
+    tardigradeErrorTools::Node safe_n1("fxn1", "error in fxn2\n");
     safe_n1.addNext(safe_n2);
 
     //Test print with headers
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE( test_printNestedExceptions ){
         }
     }
     catch( std::exception &e ){
-        errorTools::printNestedExceptions( e );
+        tardigradeErrorTools::printNestedExceptions( e );
     }
     catch(...){
         BOOST_CHECK( false );
@@ -165,29 +165,29 @@ BOOST_AUTO_TEST_CASE( test_printNestedExceptions ){
 }
 
 void badFunction( ){
-    ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( throw std::logic_error( "oops" ) );
 }
 
 void containsBadFunction( ){
-    ERROR_TOOLS_CATCH( badFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( badFunction( ) );
 }
 
 void goodFunction( ){
     return;
 }
 
-errorTools::Node* goodNodeFunction( ){
+tardigradeErrorTools::Node* goodNodeFunction( ){
     return NULL;
 }
 
-errorTools::Node* badNodeFunction( ){
-    return new errorTools::Node( __func__, "oops" );
+tardigradeErrorTools::Node* badNodeFunction( ){
+    return new tardigradeErrorTools::Node( __func__, "oops" );
 }
 
-errorTools::Node* containsBadNodeFunction( ){
-    errorTools::Node *error = badNodeFunction( );
+tardigradeErrorTools::Node* containsBadNodeFunction( ){
+    tardigradeErrorTools::Node *error = badNodeFunction( );
     if ( error ){
-        errorTools::Node *result = new errorTools::Node( __func__, "error 2");
+        tardigradeErrorTools::Node *result = new tardigradeErrorTools::Node( __func__, "error 2");
         result->addNext( error );
         return result;
     }
@@ -201,13 +201,13 @@ BOOST_AUTO_TEST_CASE( test_form_stacktrace ){
     //Initialize test variables
     cerr_redirect guard( result.rdbuf( ) );
 
-    ERROR_TOOLS_CATCH( goodFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH( goodFunction( ) );
 
     try{
-        ERROR_TOOLS_CATCH( containsBadFunction( ) );
+        TARDIGRADE_ERROR_TOOLS_CATCH( containsBadFunction( ) );
     }
     catch( std::exception &e ){
-        errorTools::printNestedExceptions( e );
+        tardigradeErrorTools::printNestedExceptions( e );
     }
 
     BOOST_CHECK( !result.is_empty( ) );
@@ -220,10 +220,10 @@ BOOST_AUTO_TEST_CASE( test_form_node_stacktrace ){
 
     cerr_redirect guard( result.rdbuf( ) );
 
-    ERROR_TOOLS_CATCH_NODE_POINTER( goodNodeFunction( ) );
+    TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( goodNodeFunction( ) );
 
     try{
-        ERROR_TOOLS_CATCH_NODE_POINTER( containsBadNodeFunction( ) );
+        TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER( containsBadNodeFunction( ) );
     }
     catch( std::exception &e ){
         std::cerr << e.what( ) << "\n";

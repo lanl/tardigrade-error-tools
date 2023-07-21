@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * \file error_tools.h
+  * \file tardigrade_error_tools.h
   ******************************************************************************
   * A collection of tools for error handling in C++ code. This is a lightweight
   * library intended to cause minimal extra burden but can use very useful for
@@ -8,8 +8,8 @@
   ******************************************************************************
   */
 
-#ifndef ERROR_TOOLS_H
-#define ERROR_TOOLS_H
+#ifndef TARDIGRADE_ERROR_TOOLS_H
+#define TARDIGRADE_ERROR_TOOLS_H
 
 #include<memory>
 #include<string>
@@ -41,7 +41,7 @@
     \param line: The integer filename
     \param file: A standard string or char filename
 */
-#define ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
+#define TARDIGRADE_ERROR_TOOLS_CATCH_INTERNAL(expr, func, line, file)                         \
     try{                                                                           \
         expr;                                                                      \
     }                                                                              \
@@ -61,18 +61,18 @@
     \brief A macro to catch exceptions and add additional information
     \param expr: The expression to be evaluated
 */
-#define ERROR_TOOLS_CATCH(expr) ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
+#define TARDIGRADE_ERROR_TOOLS_CATCH(expr) TARDIGRADE_ERROR_TOOLS_CATCH_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 /*!
-    \brief An internal macro to catch errorTools::Node pointers and convert them to exceptions
+    \brief An internal macro to catch tardigradeErrorTools::Node pointers and convert them to exceptions
            Not intended to be used in user code 
     \param expr: The expression to be evaluated that returns a pointer
-        to an errorTools::Node object
+        to an tardigradeErrorTools::Node object
     \param func: A standard string or char function name
     \param line: The integer filename
     \param file: A standard string or char filename
 */
-#define ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
+#define TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, func, line, file)            \
     if ( expr ){                                                                   \
         std::stringstream buffer;                                                  \
         std::streambuf * old = std::cerr.rdbuf( buffer.rdbuf( ) );                 \
@@ -84,13 +84,13 @@
     }                                                                              \
 
 /*!
-    \brief A macro to catch errorTools::Node pointers and convert them to exceptions
+    \brief A macro to catch tardigradeErrorTools::Node pointers and convert them to exceptions
     \param expr: The expression to be evaluated
 */
-#define ERROR_TOOLS_CATCH_NODE_POINTER(expr) ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
+#define TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER(expr) TARDIGRADE_ERROR_TOOLS_CATCH_NODE_POINTER_INTERNAL(expr, __func__, __LINE__, __FILE__)
 
 
-namespace errorTools{
+namespace tardigradeErrorTools{
 
     void replaceAll(std::string& str, const std::string& from, const std::string& to);
 

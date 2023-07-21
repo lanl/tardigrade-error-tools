@@ -6,7 +6,24 @@ Changelog
 #########
 
 ******************
-0.6.1 (unreleased)
+0.7.1 (2023-07-21)
+******************
+
+Breaking changes
+================
+- Change project, package, and namespace from 'error tools' to 'tardigrade error tools' (:issue:`23`, :merge:`54`). By
+  `Kyle Brindley`_.
+
+Internal Changes
+================
+- Clean up Conda package recipe to match installed packages/libraries to the correct build-time environments
+  (:issue:`22`, :merge:`51`). By `Kyle Brindley`_.
+- Remove compiler as a runtime dependency. The OS-correct standard library package is added as a depedency by
+  conda-build (:merge:`52`). By `Kyle Brindley`_.
+- Build c++ stdlib variants instead of compiler variants (:merge:`53`). By `Kyle Brindley`_.
+
+******************
+0.6.1 (2023-06-20)
 ******************
 
 Breaking changes

@@ -3,6 +3,7 @@ VERSION
 _version.py
 conda_build_artifacts
 conda-build-artifacts
+conda-bld
 
 # Temp files
 *.swp
@@ -20,6 +21,6 @@ __pycache__
 # Cython build artifacts
 src/python/.coverage
 src/python/cobertura.xml
-src/python/error_tools.cpython-37m-x86_64-linux-gnu.so
-src/python/error_tools_python.cpp
+src/python/tardigrade_error_tools.cpython-37m-x86_64-linux-gnu.so
+src/python/tardigrade_error_tools_python.cpp
 src/python/htmlcov/
