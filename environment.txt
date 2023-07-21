@@ -5,7 +5,7 @@ cython
 doxygen
 eigen>=3.3.7
 compilers
-# TODO: Remove mamba after tracing conda issue: https://re-git.lanl.gov/aea/material-models/error_tools/-/issues/11
+# TODO: Remove mamba after tracing conda issue: https://re-git.lanl.gov/aea/material-models/tardigrade_error_tools/-/issues/11
 mamba
 pip
 pytest

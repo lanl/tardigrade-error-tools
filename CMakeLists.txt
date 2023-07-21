@@ -1,6 +1,6 @@
 #===================================================================================================== PROJECT SETUP ===
 cmake_minimum_required(VERSION 3.14)
-project(error_tools)
+project(tardigrade_error_tools)
 
 # Set common project paths relative to project root directory
 set(CPP_SRC_PATH "src/cpp")
@@ -8,7 +8,7 @@ set(PYTHON_SRC_PATH "src/python")
 set(CMAKE_SRC_PATH "src/cmake")
 
 # Add a cached variable to build the python interface
-set(ERROR_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Boolean flag for whether the python bindings should be built")
+set(TARDIGRADE_ERROR_TOOLS_BUILD_PYTHON_BINDINGS ON CACHE BOOL "Boolean flag for whether the python bindings should be built")
 
 # Add the cmake folder to locate project CMake module(s)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${CMAKE_SRC_PATH}" ${CMAKE_MODULE_PATH})
@@ -61,7 +61,7 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
 if(${not_conda_test} STREQUAL "true")
     include_directories("${CPP_SRC_PATH}")
     add_subdirectory("${CPP_SRC_PATH}")
-    if(ERROR_TOOLS_BUILD_PYTHON_BINDINGS)
+    if(TARDIGRADE_ERROR_TOOLS_BUILD_PYTHON_BINDINGS)
         add_subdirectory(${PYTHON_SRC_PATH})
     endif()
 endif()
