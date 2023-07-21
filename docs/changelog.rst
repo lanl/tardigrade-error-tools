@@ -6,8 +6,13 @@ Changelog
 #########
 
 ******************
-0.6.2 (unreleased)
+0.7.1 (2023-07-21)
 ******************
+
+Breaking changes
+================
+- Change project, package, and namespace from 'error tools' to 'tardigrade error tools' (:issue:`23`, :merge:`54`). By
+  `Kyle Brindley`_.
 
 Internal Changes
 ================
