@@ -6,8 +6,17 @@ Changelog
 #########
 
 ******************
-0.7.3 (unreleased)
+0.7.4 (unreleased)
 ******************
+
+******************
+0.7.3 (2023-09-27)
+******************
+
+Internal Changes
+================
+- Add draft, minimal GitHub release action. Required for future conda-forge recipe (:issue:`25`, :merge:`59`). By `Kyle
+  Brindley`_.
 
 ******************
 0.7.2 (2023-09-20)
