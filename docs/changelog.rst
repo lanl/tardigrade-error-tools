@@ -6,6 +6,20 @@ Changelog
 #########
 
 ******************
+0.7.3 (unreleased)
+******************
+
+******************
+0.7.2 (2023-09-27)
+******************
+
+Internal Changes
+================
+- Clean up conda package CI files after conda-build (:issue:`24`, :merge:`56`). By `Sergio Cordova`_.
+- Add draft, minimal GitHub release action. Required for future conda-forge recipe (:issue:`25`, :merge:`59`). By `Kyle
+  Brindley`_.
+
+******************
 0.7.1 (2023-07-21)
 ******************
 
